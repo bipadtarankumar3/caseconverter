@@ -1,14 +1,24 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { 
   Copy, Share2, Download, Trash2, Settings, Coffee, 
-  CheckCircle, ShieldCheck, Zap as ZapIcon, Check, Star 
+  CheckCircle, ShieldCheck, Zap as ZapIcon, Check, Star,
+  Type, CaseUpper, CaseLower, CaseSensitive, Hash, FileText,
+  Sparkles, Rocket, Layers, HelpCircle, Lock, MessageSquare, Trophy
 } from 'lucide-react';
 
 export default function CaseConverter() {
   const [text, setText] = useState('');
+  const [copied, setCopied] = useState(false);
   const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => setCopied(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
 
   const getStats = () => {
     const chars = text.length;
@@ -20,6 +30,7 @@ export default function CaseConverter() {
   const handleCopy = () => {
     if (!text) return;
     navigator.clipboard.writeText(text);
+    setCopied(true);
   };
 
   const handleDownload = () => {
@@ -103,64 +114,73 @@ export default function CaseConverter() {
 
           <div className="toolbar">
             <div className="action-icons">
-              <button suppressHydrationWarning onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard"><Copy size={20} /></button>
+              <button suppressHydrationWarning onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard">
+                {copied ? <Check size={20} className="text-success" /> : <Copy size={20} />}
+              </button>
               <button suppressHydrationWarning onClick={() => {}} title="Share" aria-label="Share"><Share2 size={20} /></button>
               <button suppressHydrationWarning onClick={handleDownload} title="Download as .txt" aria-label="Download as text file"><Download size={20} /></button>
               <button suppressHydrationWarning onClick={handleClear} title="Clear text" aria-label="Clear all text"><Trash2 size={20} /></button>
               <button suppressHydrationWarning onClick={() => {}} title="Settings" aria-label="Settings"><Settings size={20} /></button>
             </div>
             <div className="stats">
-              <span><strong>{stats.chars}</strong> Characters</span>
-              <span><strong>{stats.words}</strong> Words</span>
-              <span><strong>{stats.lines}</strong> Lines</span>
+              <div className="stat-item"><Hash size={16} /> <span><strong>{stats.chars}</strong> Characters</span></div>
+              <div className="stat-item"><Type size={16} /> <span><strong>{stats.words}</strong> Words</span></div>
+              <div className="stat-item"><FileText size={16} /> <span><strong>{stats.lines}</strong> Lines</span></div>
             </div>
           </div>
 
           <div className="converter-actions">
             <div className="case-buttons">
               <button suppressHydrationWarning onClick={toSentenceCase} className="case-btn" aria-label="Convert to Sentence case">
-                <span className="btn-prefix sc">Sc</span> Sentence case
+                <span className="btn-prefix sc">Sc</span>
+                <span>Sentence case</span>
               </button>
               <button suppressHydrationWarning onClick={toLowerCase} className="case-btn" aria-label="Convert to lower case">
-                <span className="btn-prefix lc">lc</span> lower case
+                <span className="btn-prefix lc">lc</span>
+                <span>lower case</span>
               </button>
               <button suppressHydrationWarning onClick={toUpperCase} className="case-btn" aria-label="Convert to UPPER CASE">
-                <span className="btn-prefix uc">UC</span> UPPER CASE
+                <span className="btn-prefix uc">UC</span>
+                <span>UPPER CASE</span>
               </button>
               <button suppressHydrationWarning onClick={toCapitalizedCase} className="case-btn" aria-label="Convert to Capitalized Case">
-                <span className="btn-prefix cc">CC</span> Capitalized Case
+                <span className="btn-prefix cc">CC</span>
+                <span>Capitalized Case</span>
               </button>
               <button suppressHydrationWarning onClick={toAlternatingCase} className="case-btn" aria-label="Convert to aLtErNaTiNg cAsE">
-                <span className="btn-prefix ac">aC</span> aLtErNaTiNg cAsE
+                <span className="btn-prefix ac">aC</span>
+                <span>aLtErNaTiNg cAsE</span>
               </button>
               <button suppressHydrationWarning onClick={toTitleCase} className="case-btn" aria-label="Convert to Title Case">
-                <span className="btn-prefix tc">TC</span> Title Case
+                <span className="btn-prefix tc">TC</span>
+                <span>Title Case</span>
               </button>
               <button suppressHydrationWarning onClick={toInverseCase} className="case-btn" aria-label="Convert to iNVeRsE CaSe">
-                <span className="btn-prefix ic">iC</span> iNVeRsE CaSe
+                <span className="btn-prefix ic">iC</span>
+                <span>iNVeRsE CaSe</span>
               </button>
             </div>
             
-            <a href="https://buymeacoffee.com" className="coffee-btn" target="_blank" rel="noopener noreferrer" aria-label="Support us by buying a coffee">
-              <Coffee size={20} className="coffee-icon" /> Buy me a coffee
-            </a>
+            {/* <a href="https://buymeacoffee.com" className="coffee-btn" target="_blank" rel="noopener noreferrer" aria-label="Support us by buying a coffee">
+              <Coffee size={22} className="coffee-icon" /> Buy me a coffee
+            </a> */}
           </div>
         </div>
       </section>
 
       <section id="features" className="features-grid">
         <article className="feature-card">
-          <ZapIcon className="feature-icon" size={24} />
+          <div className="feature-icon"><ZapIcon size={28} /></div>
           <h3 className="feature-title">Real-time Statistics</h3>
           <p className="feature-description">Our advanced engine calculates character, word, and line counts in real-time as you type or paste.</p>
         </article>
         <article className="feature-card">
-          <ShieldCheck className="feature-icon" size={24} />
+          <div className="feature-icon"><ShieldCheck size={28} /></div>
           <h3 className="feature-title">Privacy Focused</h3>
           <p className="feature-description">All processing happens locally in your browser. Your data never leaves your machine.</p>
         </article>
         <article className="feature-card">
-          <CheckCircle className="feature-icon" size={24} />
+          <div className="feature-icon"><Sparkles size={28} /></div>
           <h3 className="feature-title">Smart Title Case</h3>
           <p className="feature-description">Optimized algorithm that correctly handles minor words like 'of', 'and', and 'the'.</p>
         </article>
@@ -170,12 +190,15 @@ export default function CaseConverter() {
         <h2 className="info-title">Trusted by Power Users</h2>
         <div className="testimonials-grid">
           <div className="testimonial-card">
-            <div style={{ display: 'flex', gap: '4px', color: '#fbbf24' }}>
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
+            <div className="testimonial-header">
+              <div style={{ display: 'flex', gap: '4px', color: '#fbbf24' }}>
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+              </div>
+              <Trophy size={20} style={{ color: 'var(--primary)', opacity: 0.6 }} />
             </div>
             <p className="testimonial-text">"The interface is stunning. I've never seen a case converter that looks this good and works this fast."</p>
             <div className="testimonial-user">
@@ -187,12 +210,15 @@ export default function CaseConverter() {
             </div>
           </div>
           <div className="testimonial-card">
-            <div style={{ display: 'flex', gap: '4px', color: '#fbbf24' }}>
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
-              <Star size={16} fill="currentColor" />
+            <div className="testimonial-header">
+              <div style={{ display: 'flex', gap: '4px', color: '#fbbf24' }}>
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+                <Star size={16} fill="currentColor" />
+              </div>
+              <MessageSquare size={20} style={{ color: 'var(--accent)', opacity: 0.6 }} />
             </div>
             <p className="testimonial-text">"As a copywriter, I use this daily. The Title Case tool is the most accurate I've found online."</p>
             <div className="testimonial-user">
@@ -206,34 +232,36 @@ export default function CaseConverter() {
         </div>
       </section>
 
-      {/* <section id="pricing" className="pricing-section">
+      <section id="pricing" className="pricing-section">
         <h2 className="info-title">Flexible Plans for Every User</h2>
         <div className="pricing-grid">
           <div className="pricing-card">
+            <Layers className="feature-icon" style={{ marginBottom: '1.5rem' }} />
             <h3>Community</h3>
             <div className="pricing-price">$0<span>/forever</span></div>
             <ul className="pricing-features">
-              <li><Check size={18} /> 7+ Case Transformations</li>
-              <li><Check size={18} /> Real-time Statistics</li>
-              <li><Check size={18} /> Local Browser Processing</li>
-              <li><Check size={18} /> Ad-free Experience</li>
+              <li><CheckCircle size={18} className="text-success" /> 7+ Case Transformations</li>
+              <li><CheckCircle size={18} className="text-success" /> Real-time Statistics</li>
+              <li><CheckCircle size={18} className="text-success" /> Local Browser Processing</li>
+              <li><CheckCircle size={18} className="text-success" /> Ad-free Experience</li>
             </ul>
             <button suppressHydrationWarning className="pricing-btn">Get Started</button>
           </div>
           <div className="pricing-card popular">
+            <Rocket className="feature-icon" style={{ marginBottom: '1.5rem', background: 'rgba(255,255,255,0.1)', color: '#fff' }} />
             <span className="pricing-badge">BEST VALUE</span>
             <h3>Beast Pro</h3>
             <div className="pricing-price">$9<span>/month</span></div>
             <ul className="pricing-features">
-              <li><Check size={18} /> <strong>Unlimited</strong> Transformations</li>
-              <li><Check size={18} /> <strong>API</strong> Access Integration</li>
-              <li><Check size={18} /> <strong>Custom</strong> Case Profiles</li>
-              <li><Check size={18} /> Priority Support</li>
+              <li><CheckCircle size={18} style={{ color: 'var(--primary)' }} /> <strong>Unlimited</strong> Transformations</li>
+              <li><CheckCircle size={18} style={{ color: 'var(--primary)' }} /> <strong>API</strong> Access Integration</li>
+              <li><CheckCircle size={18} style={{ color: 'var(--primary)' }} /> <strong>Custom</strong> Case Profiles</li>
+              <li><CheckCircle size={18} style={{ color: 'var(--primary)' }} /> Priority Support</li>
             </ul>
             <button suppressHydrationWarning className="pricing-btn primary">Unlock Beast Mode</button>
           </div>
         </div>
-      </section> */}
+      </section>
 
       <section id="newsletter" className="newsletter-section">
         <h2 className="info-title">Join the Beast Community</h2>
@@ -266,12 +294,18 @@ export default function CaseConverter() {
         <h2 className="faq-title">Frequently Asked Questions</h2>
         <div className="faq-container">
           <details className="faq-item">
-            <summary className="faq-summary">What is Sentence Case?</summary>
-            <p className="faq-content">Sentence case capitalizes the first letter of every sentence and converts the rest to lowercase.</p>
+            <summary className="faq-summary">
+              <HelpCircle size={20} className="faq-icon" />
+              <span>What is Sentence Case?</span>
+            </summary>
+            <p className="faq-content">Sentence case capitalizes the first letter of every sentence and converts the rest to lowercase. It follows standard grammatical rules for professional writing.</p>
           </details>
           <details className="faq-item">
-            <summary className="faq-summary">How secure is my data?</summary>
-            <p className="faq-content">We prioritize your security. All transformations happen locally in your browser session.</p>
+            <summary className="faq-summary">
+              <Lock size={20} className="faq-icon" />
+              <span>How secure is my data?</span>
+            </summary>
+            <p className="faq-content">We prioritize your security. All transformations happen locally in your browser session using JavaScript. No text is ever uploaded to our servers, ensuring 100% data privacy.</p>
           </details>
         </div>
       </section>

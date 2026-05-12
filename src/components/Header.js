@@ -26,11 +26,11 @@ export default function Header() {
           <a href="/" onClick={() => setIsMenuOpen(false)}>Home</a>
           <a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a>
           <a href="#how-it-works" onClick={() => setIsMenuOpen(false)}>How it Works</a>
-          {/* <a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a> */}
-          {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="github-btn">
+          <a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="github-btn">
             <CodeXml size={18} aria-hidden="true" />
             <span>Star on GitHub</span>
-          </a> */}
+          </a>
         </nav>
       </div>
     </header>

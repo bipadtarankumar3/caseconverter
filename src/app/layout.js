@@ -1,6 +1,6 @@
 import './globals.css';
 import Header from '@/components/Header';
-import { CodeXml, Send, Mail, Zap } from 'lucide-react';
+import { CodeXml, X, Mail, Zap } from 'lucide-react';
 
 export const metadata = {
   title: 'Case Converter Beast | The Ultimate Online Text Transformation Tool',
@@ -108,18 +108,18 @@ export default function RootLayout({ children }) {
           <div className="container footer-inner">
             <div className="footer-left">
               <div className="logo">
-                <Zap className="logo-icon" size={20} aria-hidden="true" />
+                <Zap className="logo-icon" size={24} aria-hidden="true" />
                 <span>CASE<span>BEAST</span></span>
               </div>
-              <p>The world's most advanced online case converter. Built for speed, optimized for accuracy, and designed for the modern web professional.</p>
+              <p>The world's most advanced online case converter. Built for speed, optimized for accuracy, and designed for the modern web professional. Your privacy is our priority—all processing happens locally.</p>
             </div>
             <div className="footer-right">
               <div className="social-links">
-                <a href="#" title="Follow us on Twitter" aria-label="Twitter"><Send size={22} /></a>
+                <a href="#" title="Follow us on X" aria-label="X"><X size={22} /></a>
                 <a href="#" title="Contact us via Email" aria-label="Email"><Mail size={22} /></a>
-                <a href="#" title="View source on GitHub" aria-label="GitHub"><CodeXml size={22} /></a>
+                <a href="https://github.com" title="View source on GitHub" aria-label="GitHub"><CodeXml size={22} /></a>
               </div>
-              <p className="footer-copy" suppressHydrationWarning>&copy; {new Date().getFullYear()} CaseBeast. All rights reserved.</p>
+              <p className="footer-copy" suppressHydrationWarning>&copy; {new Date().getFullYear()} CaseBeast. Built with passion for the web.</p>
             </div>
           </div>
         </footer>
