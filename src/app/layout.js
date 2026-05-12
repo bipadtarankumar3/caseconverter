@@ -119,7 +119,7 @@ export default function RootLayout({ children }) {
                 <a href="#" title="Contact us via Email" aria-label="Email"><Mail size={22} /></a>
                 <a href="#" title="View source on GitHub" aria-label="GitHub"><CodeXml size={22} /></a>
               </div>
-              <p className="footer-copy">&copy; {new Date().getFullYear()} CaseBeast. All rights reserved.</p>
+              <p className="footer-copy" suppressHydrationWarning>&copy; {new Date().getFullYear()} CaseBeast. All rights reserved.</p>
             </div>
           </div>
         </footer>

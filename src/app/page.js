@@ -103,11 +103,11 @@ export default function CaseConverter() {
 
           <div className="toolbar">
             <div className="action-icons">
-              <button onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard"><Copy size={20} /></button>
-              <button onClick={() => {}} title="Share" aria-label="Share"><Share2 size={20} /></button>
-              <button onClick={handleDownload} title="Download as .txt" aria-label="Download as text file"><Download size={20} /></button>
-              <button onClick={handleClear} title="Clear text" aria-label="Clear all text"><Trash2 size={20} /></button>
-              <button onClick={() => {}} title="Settings" aria-label="Settings"><Settings size={20} /></button>
+              <button suppressHydrationWarning onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard"><Copy size={20} /></button>
+              <button suppressHydrationWarning onClick={() => {}} title="Share" aria-label="Share"><Share2 size={20} /></button>
+              <button suppressHydrationWarning onClick={handleDownload} title="Download as .txt" aria-label="Download as text file"><Download size={20} /></button>
+              <button suppressHydrationWarning onClick={handleClear} title="Clear text" aria-label="Clear all text"><Trash2 size={20} /></button>
+              <button suppressHydrationWarning onClick={() => {}} title="Settings" aria-label="Settings"><Settings size={20} /></button>
             </div>
             <div className="stats">
               <span><strong>{stats.chars}</strong> Characters</span>
@@ -118,25 +118,25 @@ export default function CaseConverter() {
 
           <div className="converter-actions">
             <div className="case-buttons">
-              <button onClick={toSentenceCase} className="case-btn" aria-label="Convert to Sentence case">
+              <button suppressHydrationWarning onClick={toSentenceCase} className="case-btn" aria-label="Convert to Sentence case">
                 <span className="btn-prefix sc">Sc</span> Sentence case
               </button>
-              <button onClick={toLowerCase} className="case-btn" aria-label="Convert to lower case">
+              <button suppressHydrationWarning onClick={toLowerCase} className="case-btn" aria-label="Convert to lower case">
                 <span className="btn-prefix lc">lc</span> lower case
               </button>
-              <button onClick={toUpperCase} className="case-btn" aria-label="Convert to UPPER CASE">
+              <button suppressHydrationWarning onClick={toUpperCase} className="case-btn" aria-label="Convert to UPPER CASE">
                 <span className="btn-prefix uc">UC</span> UPPER CASE
               </button>
-              <button onClick={toCapitalizedCase} className="case-btn" aria-label="Convert to Capitalized Case">
+              <button suppressHydrationWarning onClick={toCapitalizedCase} className="case-btn" aria-label="Convert to Capitalized Case">
                 <span className="btn-prefix cc">CC</span> Capitalized Case
               </button>
-              <button onClick={toAlternatingCase} className="case-btn" aria-label="Convert to aLtErNaTiNg cAsE">
+              <button suppressHydrationWarning onClick={toAlternatingCase} className="case-btn" aria-label="Convert to aLtErNaTiNg cAsE">
                 <span className="btn-prefix ac">aC</span> aLtErNaTiNg cAsE
               </button>
-              <button onClick={toTitleCase} className="case-btn" aria-label="Convert to Title Case">
+              <button suppressHydrationWarning onClick={toTitleCase} className="case-btn" aria-label="Convert to Title Case">
                 <span className="btn-prefix tc">TC</span> Title Case
               </button>
-              <button onClick={toInverseCase} className="case-btn" aria-label="Convert to iNVeRsE CaSe">
+              <button suppressHydrationWarning onClick={toInverseCase} className="case-btn" aria-label="Convert to iNVeRsE CaSe">
                 <span className="btn-prefix ic">iC</span> iNVeRsE CaSe
               </button>
             </div>
@@ -206,7 +206,7 @@ export default function CaseConverter() {
         </div>
       </section>
 
-      <section id="pricing" className="pricing-section">
+      {/* <section id="pricing" className="pricing-section">
         <h2 className="info-title">Flexible Plans for Every User</h2>
         <div className="pricing-grid">
           <div className="pricing-card">
@@ -218,7 +218,7 @@ export default function CaseConverter() {
               <li><Check size={18} /> Local Browser Processing</li>
               <li><Check size={18} /> Ad-free Experience</li>
             </ul>
-            <button className="pricing-btn">Get Started</button>
+            <button suppressHydrationWarning className="pricing-btn">Get Started</button>
           </div>
           <div className="pricing-card popular">
             <span className="pricing-badge">BEST VALUE</span>
@@ -230,17 +230,17 @@ export default function CaseConverter() {
               <li><Check size={18} /> <strong>Custom</strong> Case Profiles</li>
               <li><Check size={18} /> Priority Support</li>
             </ul>
-            <button className="pricing-btn primary">Unlock Beast Mode</button>
+            <button suppressHydrationWarning className="pricing-btn primary">Unlock Beast Mode</button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="newsletter" className="newsletter-section">
         <h2 className="info-title">Join the Beast Community</h2>
         <p className="hero-subtitle">Get notified about new features, power-user tips, and text transformation guides.</p>
         <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-          <input type="email" placeholder="Enter your email" className="newsletter-input" required />
-          <button type="submit" className="newsletter-btn">Subscribe</button>
+          <input suppressHydrationWarning type="email" placeholder="Enter your email" className="newsletter-input" required />
+          <button suppressHydrationWarning type="submit" className="newsletter-btn">Subscribe</button>
         </form>
       </section>
 
