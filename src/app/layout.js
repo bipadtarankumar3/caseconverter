@@ -104,22 +104,22 @@ export default function RootLayout({ children }) {
           {children}
         </main>
 
-        <footer className="footer" role="contentinfo">
-          <div className="container footer-inner">
-            <div className="footer-left">
-              <div className="logo">
-                <Zap className="logo-icon" size={24} aria-hidden="true" />
-                <span>CASE<span>BEAST</span></span>
+        <footer className="py-12 md:py-24 border-t border-white/10" role="contentinfo">
+          <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center md:items-start gap-12 text-center md:text-left max-w-[1600px]">
+            <div className="max-w-md">
+              <div className="flex items-center gap-3 font-black text-2xl tracking-tighter text-white mb-6 justify-center md:justify-start">
+                <Zap className="text-primary animate-pulse-glow" size={24} aria-hidden="true" />
+                <span>CASE<span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">BEAST</span></span>
               </div>
-              <p>The world's most advanced online case converter. Built for speed, optimized for accuracy, and designed for the modern web professional. Your privacy is our priority—all processing happens locally.</p>
+              <p className="text-muted leading-relaxed text-sm md:text-base">The world's most advanced online case converter. Built for speed, optimized for accuracy, and designed for the modern web professional. Your privacy is our priority—all processing happens locally.</p>
             </div>
-            <div className="footer-right">
-              <div className="social-links">
-                <a href="#" title="Follow us on X" aria-label="X"><X size={22} /></a>
-                <a href="#" title="Contact us via Email" aria-label="Email"><Mail size={22} /></a>
-                <a href="https://github.com" title="View source on GitHub" aria-label="GitHub"><CodeXml size={22} /></a>
+            <div className="flex flex-col items-center md:items-end gap-6">
+              <div className="flex gap-4">
+                <a href="#" className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-xl hover:bg-primary/40 hover:text-primary transition-all hover:-translate-y-1" title="Follow us on X" aria-label="X"><X size={22} /></a>
+                <a href="#" className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-xl hover:bg-primary/40 hover:text-primary transition-all hover:-translate-y-1" title="Contact us via Email" aria-label="Email"><Mail size={22} /></a>
+                <a href="https://github.com" className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-xl hover:bg-primary/40 hover:text-primary transition-all hover:-translate-y-1" title="View source on GitHub" aria-label="GitHub"><CodeXml size={22} /></a>
               </div>
-              <p className="footer-copy" suppressHydrationWarning>&copy; {new Date().getFullYear()} CaseBeast. Built with passion for the web.</p>
+              <p className="text-muted text-sm" suppressHydrationWarning>&copy; {new Date().getFullYear()} CaseBeast. Built with passion for the web.</p>
             </div>
           </div>
         </footer>
