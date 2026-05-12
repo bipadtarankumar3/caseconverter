@@ -89,13 +89,12 @@ export default function CaseConverter() {
 
   return (
     <div className="container mx-auto px-4 md:px-6 animate-fade-in max-w-[1600px]">
-      <section className="text-center mb-8 md:mb-20 max-w-[1200px] mx-auto pt-10 md:pt-20">
+      <section className="text-center mb-8 md:mb-10 max-w-[1200px] mx-auto pt-10 md:pt-10">
         <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-6 leading-none bg-gradient-to-b from-white to-muted bg-clip-text text-transparent">
           Unleash the <span className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-2 after:bg-primary/40 after:blur-lg after:-z-10">BEAST</span> in your text.
         </h1>
-        <p className="text-base md:text-xl text-muted leading-relaxed max-w-2xl mx-auto">
-          Professional-grade case conversion with a stunning glassmorphic interface. 
-          The most reliable online tool for changing text case effortlessly.
+        <p className="text-base md:text-xl text-muted leading-relaxed mx-auto">
+          Professional-grade case conversion with a stunning glassmorphic interface.
         </p>
       </section>
 
@@ -107,13 +106,13 @@ export default function CaseConverter() {
               id="text-input"
               ref={textareaRef}
               placeholder="Type or paste your content here to transform it instantly..."
-              className="w-full h-[180px] md:h-[240px] bg-transparent border-none text-white text-lg md:text-2xl resize-none outline-none leading-relaxed font-normal placeholder:text-white/20"
+              className="w-full h-[180px] md:h-[180px] bg-transparent border-none text-white text-lg md:text-2xl resize-none outline-none leading-relaxed font-normal placeholder:text-white/20"
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center p-4 md:px-10 md:py-5 bg-white/[0.02] border-t border-b border-white/10 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center p-2 md:px-10 md:py-2 bg-white/[0.02] border-t border-b border-white/10 gap-4">
             <div className="flex gap-4">
               <button suppressHydrationWarning onClick={handleCopy} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Copy to clipboard" aria-label="Copy to clipboard">
                 {copied ? <Check size={20} className="text-success" /> : <Copy size={20} />}
@@ -130,7 +129,7 @@ export default function CaseConverter() {
             </div>
           </div>
 
-          <div className="p-4 md:p-10 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="p-4 md:p-3 flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4 w-full flex-1">
               {[
                 { label: 'Sentence case', fn: toSentenceCase, color: 'from-[#f97316] to-[#fb923c]', prefix: 'Sc' },
@@ -145,7 +144,7 @@ export default function CaseConverter() {
                   key={i}
                   suppressHydrationWarning 
                   onClick={btn.fn} 
-                  className="group relative overflow-hidden flex items-center justify-start gap-3 p-3 md:p-5 bg-white/[0.03] border border-white/10 rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:border-primary hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(56,189,248,0.3)]"
+                  className="group relative overflow-hidden flex items-center justify-start gap-3 p-3 md:p-2 bg-white/[0.03] border border-white/10 rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:border-primary hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(56,189,248,0.3)]"
                 >
                   <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-[10px] uppercase font-black text-white shrink-0 bg-gradient-to-br ${btn.color}`}>{btn.prefix}</span>
                   <span>{btn.label}</span>
@@ -153,10 +152,10 @@ export default function CaseConverter() {
                 </button>
               ))}
             </div>
-            
+{/*             
             <a href="https://buymeacoffee.com" className="flex items-center gap-3 bg-[#fcd34d] text-black px-7 py-4 rounded-[18px] font-black shadow-[0_10px_20px_-5px_rgba(252,211,77,0.3)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_15px_30px_-5px_rgba(252,211,77,0.4)] transition-all shrink-0 w-full lg:w-auto justify-center" target="_blank" rel="noopener noreferrer">
               <Coffee size={22} className="text-[#b45309]" /> Buy me a coffee
-            </a>
+            </a> */}
           </div>
         </div>
       </section>
@@ -238,7 +237,7 @@ export default function CaseConverter() {
         </div>
       </section>
 
-      <section id="pricing" className="mt-12 md:mt-24">
+      {/* <section id="pricing" className="mt-12 md:mt-24">
         <h2 className="text-4xl md:text-6xl font-black mb-16 text-center tracking-tighter">Flexible Plans for Every User</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto">
           <div className="p-12 md:p-16 bg-slate-900/50 rounded-[40px] border border-white/10 hover:border-primary transition-all duration-500 group">
@@ -267,7 +266,7 @@ export default function CaseConverter() {
             <button suppressHydrationWarning className="w-full py-4 rounded-2xl bg-primary hover:bg-primary/90 transition-all font-black text-slate-950 shadow-lg shadow-primary/20">Unlock Beast Mode</button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section id="newsletter" className="mt-12 md:mt-24 p-8 md:p-24 bg-gradient-to-br from-accent/5 via-primary/5 to-transparent rounded-[60px] border border-white/10 text-center relative overflow-hidden">
         <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">Join the Beast Community</h2>
