@@ -2,23 +2,25 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { CodeXml, X, Mail, Zap } from 'lucide-react';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 
 export const metadata = {
-  title: 'Case Converter Beast | The Ultimate Online Text Transformation Tool',
-  description: 'Convert text cases effortlessly with Case Converter Beast. Supports Sentence case, lower case, UPPER CASE, Capitalized Case, Title Case, and more. Free, fast, and secure text transformation for developers and writers.',
+  title: 'Case Converter | The Ultimate Online Text Transformation Tool',
+  description: 'Convert text cases effortlessly with Case Converter. Supports Sentence case, lower case, UPPER CASE, Capitalized Case, Title Case, and more. Free, fast, and secure text transformation for developers and writers.',
   keywords: 'case converter, text transformation, sentence case, title case, upper case, lower case, convert text online, toggle case, inverse case, alternating case, capitalized case',
-  authors: [{ name: 'CaseBeast' }],
+  authors: [{ name: 'CaseConverter' }],
   openGraph: {
-    title: 'Case Converter Beast - Professional Text Tools',
+    title: 'Case Converter - Professional Text Tools',
     description: 'The most powerful online case converter with a premium glassmorphic interface. Transform your text instantly.',
-    url: 'https://casebeast.vercel.app',
-    siteName: 'CaseBeast',
+    url: 'https://caseconverter.revoxera.com',
+    siteName: 'CaseConverter',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Case Converter Beast',
+    title: 'Case Converter',
     description: 'Transform your text with style. The ultimate professional case converter.',
   },
   robots: {
@@ -30,7 +32,7 @@ export const metadata = {
 const softwareSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Case Converter Beast",
+  "name": "Case Converter",
   "operatingSystem": "All",
   "applicationCategory": "UtilitiesApplication",
   "offers": {
@@ -63,7 +65,7 @@ const faqSchema = {
       "name": "Is this text converter free to use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, Case Converter Beast is 100% free for personal and professional use. No registration is required."
+        "text": "Yes, Case Converter is 100% free for personal and professional use. No registration is required."
       }
     },
     {
@@ -84,7 +86,7 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-        <link rel="canonical" href="https://casebeast.vercel.app" />
+        <link rel="canonical" href="https://caseconverter.revoxera.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
@@ -108,6 +110,7 @@ export default function RootLayout({ children }) {
 
 
 
+        <GoogleAnalytics gaId="G-MQEWLCWPRN" />
       </body>
     </html>
   );

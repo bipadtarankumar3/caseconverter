@@ -92,7 +92,7 @@ export default function CaseConverter() {
     <div className="container mx-auto px-4 md:px-6 animate-fade-in max-w-[1600px]">
       <section className="text-center mb-8 md:mb-10 max-w-[1200px] mx-auto pt-10 md:pt-10">
         <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-6 leading-none bg-gradient-to-b from-white to-muted bg-clip-text text-transparent">
-          Unleash the <span className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-2 after:bg-primary/40 after:blur-lg after:-z-10">BEAST</span> in your text.
+          Case <span className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-2 after:bg-primary/40 after:blur-lg after:-z-10">Converter</span>
         </h1>
         <p className="text-base md:text-xl text-muted leading-relaxed mx-auto">
           Professional-grade case conversion with a stunning glassmorphic interface.
