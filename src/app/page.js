@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { 
-  Copy, Share2, Download, Trash2, Settings, Coffee, 
+import {
+  Copy, Share2, Download, Trash2, Settings, Coffee,
   CheckCircle, ShieldCheck, Zap as ZapIcon, Check, Star,
   Type, CaseUpper, CaseLower, CaseSensitive, Hash, FileText,
   Sparkles, Rocket, Layers, HelpCircle, Lock, MessageSquare, Trophy, Plus
@@ -37,7 +37,7 @@ export default function CaseConverter() {
   const handleDownload = () => {
     if (!text) return;
     const element = document.createElement("a");
-    const file = new Blob([text], {type: 'text/plain'});
+    const file = new Blob([text], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = "converted-text.txt";
     document.body.appendChild(element);
@@ -57,14 +57,14 @@ export default function CaseConverter() {
   const toUpperCase = () => setText(text.toUpperCase());
 
   const toCapitalizedCase = () => {
-    const converted = text.toLowerCase().split(' ').map(word => 
+    const converted = text.toLowerCase().split(' ').map(word =>
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
     setText(converted);
   };
 
   const toAlternatingCase = () => {
-    const converted = text.split('').map((char, i) => 
+    const converted = text.split('').map((char, i) =>
       i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()
     ).join('');
     setText(converted);
@@ -80,7 +80,7 @@ export default function CaseConverter() {
   };
 
   const toInverseCase = () => {
-    const converted = text.split('').map(char => 
+    const converted = text.split('').map(char =>
       char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()
     ).join('');
     setText(converted);
@@ -118,10 +118,10 @@ export default function CaseConverter() {
               <button suppressHydrationWarning onClick={handleCopy} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Copy to clipboard" aria-label="Copy to clipboard">
                 {copied ? <Check size={20} className="text-success" /> : <Copy size={20} />}
               </button>
-              <button suppressHydrationWarning onClick={() => {}} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Share" aria-label="Share"><Share2 size={20} /></button>
+              <button suppressHydrationWarning onClick={() => { }} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Share" aria-label="Share"><Share2 size={20} /></button>
               <button suppressHydrationWarning onClick={handleDownload} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Download as .txt" aria-label="Download as text file"><Download size={20} /></button>
               <button suppressHydrationWarning onClick={handleClear} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Clear text" aria-label="Clear all text"><Trash2 size={20} /></button>
-              <button suppressHydrationWarning onClick={() => {}} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Settings" aria-label="Settings"><Settings size={20} /></button>
+              <button suppressHydrationWarning onClick={() => { }} className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5" title="Settings" aria-label="Settings"><Settings size={20} /></button>
             </div>
             <div className="flex gap-4 md:gap-8 text-sm text-muted">
               <div className="flex items-center gap-2"><Hash size={16} /> <span><strong className="text-white text-lg">{stats.chars}</strong> Characters</span></div>
@@ -141,10 +141,10 @@ export default function CaseConverter() {
                 { label: 'Title Case', fn: toTitleCase, color: 'from-[#10b981] to-[#34d399]', prefix: 'TC' },
                 { label: 'iNVeRsE CaSe', fn: toInverseCase, color: 'from-[#ec4899] to-[#f472b6]', prefix: 'iC' },
               ].map((btn, i) => (
-                <button 
+                <button
                   key={i}
-                  suppressHydrationWarning 
-                  onClick={btn.fn} 
+                  suppressHydrationWarning
+                  onClick={btn.fn}
                   className="group relative overflow-hidden flex items-center justify-start gap-3 p-3 md:p-2 bg-white/[0.03] border border-white/10 rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:border-primary hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(56,189,248,0.3)]"
                 >
                   <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-[10px] uppercase font-black text-white shrink-0 bg-gradient-to-br ${btn.color}`}>{btn.prefix}</span>
@@ -153,7 +153,7 @@ export default function CaseConverter() {
                 </button>
               ))}
             </div>
-{/*             
+            {/*             
             <a href="https://buymeacoffee.com" className="flex items-center gap-3 bg-[#fcd34d] text-black px-7 py-4 rounded-[18px] font-black shadow-[0_10px_20px_-5px_rgba(252,211,77,0.3)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_15px_30px_-5px_rgba(252,211,77,0.4)] transition-all shrink-0 w-full lg:w-auto justify-center" target="_blank" rel="noopener noreferrer">
               <Coffee size={22} className="text-[#b45309]" /> Buy me a coffee
             </a> */}
@@ -325,7 +325,6 @@ export default function CaseConverter() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }
