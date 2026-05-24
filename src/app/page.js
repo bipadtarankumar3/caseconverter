@@ -7,6 +7,7 @@ import {
   Type, CaseUpper, CaseLower, CaseSensitive, Hash, FileText,
   Sparkles, Rocket, Layers, HelpCircle, Lock, MessageSquare, Trophy, Plus
 } from 'lucide-react';
+import Footer from '../components/Footer';
 
 export default function CaseConverter() {
   const [text, setText] = useState('');
@@ -324,12 +325,7 @@ export default function CaseConverter() {
         </div>
       </section>
 
-      <footer className="pt-8 pb-12 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-widest text-muted border-t border-white/5">
-        <p>© 2026 Case Beast. All rights reserved.</p>
-        <div className="flex gap-8">
-          <a href="https://tools.orbytara.com/services" className="hover:text-white transition-colors">Services</a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
