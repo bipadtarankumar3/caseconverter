@@ -17,15 +17,20 @@ export const metadata = {
     siteName: 'CaseConverter',
     locale: 'en_US',
     type: 'website',
+    images: ['/logo.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Case Converter',
     description: 'Transform your text with style. The ultimate professional case converter.',
+    images: ['/logo.png'],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: '/logo.png',
   },
 };
 
