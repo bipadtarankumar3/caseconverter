@@ -77,17 +77,17 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative border-t border-white/5 pt-24 pb-12 px-6 bg-[#050508] overflow-hidden">
+    <footer className="relative border-t border-glass-border pt-24 pb-12 px-6 bg-background overflow-hidden">
       {/* Neural Background overlay image (highly toned down dark watermark style) */}
       <div
-        className="absolute inset-0 bg-cover bg-center mix-blend-screen opacity-[0.035] pointer-events-none"
+        className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-[0.035] pointer-events-none"
         style={{ backgroundImage: "url('/ai_neural_footer.png')" }}
       />
       {/* Radial overlay to blend background borders cleanly */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050508]/95 via-transparent to-[#050508] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-transparent to-background pointer-events-none" />
 
       {/* Top glowing edge */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
@@ -101,26 +101,26 @@ export default function Footer() {
                 <img src="/logo.png" alt="Revoxera Logo" className="w-full h-full object-cover invert dark:invert-0 hue-rotate-180 dark:hue-rotate-0 contrast-125 dark:contrast-100 saturate-150 dark:saturate-100 rounded-xl" />
               </div>
             </Link>
-            <p className="text-sm text-white/50 leading-relaxed max-w-sm">
+            <p className="text-sm text-foreground/60 leading-relaxed max-w-sm">
               Precision-crafted developer tools designed to streamline your daily programming, formatting, and design workflows.
             </p>
 
             {/* Contact cards */}
             <div className="space-y-2 mt-4">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/20 mb-2 ml-1">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/20 mb-2 ml-1">
                 Get in touch
               </p>
 
               <a
                 href="mailto:support@revoxera.com"
-                className="group flex items-center gap-3 rounded-2xl border border-white/5 bg-white/2 px-3.5 py-3 transition-all duration-500 ease-out hover:translate-y-[-2px] hover:border-violet-500/20 hover:bg-white/4 hover:shadow-[0_8px_30px_rgba(124,58,237,0.08)]"
+                className="group flex items-center gap-3 rounded-2xl border border-glass-border bg-foreground/2 px-3.5 py-3 transition-all duration-500 ease-out hover:translate-y-[-2px] hover:border-primary/20 hover:bg-foreground/4 hover:shadow-[0_8px_30px_var(--primary-glow)]"
               >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-violet-500/10 transition-all duration-500 group-hover:bg-violet-500/20">
-                  <Mail size={13} className="text-violet-400" />
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/10 transition-all duration-500 group-hover:bg-primary/20">
+                  <Mail size={13} className="text-primary" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[13px] font-semibold leading-none text-white">support@revoxera.com</p>
-                  <p className="mt-1 text-[11px] text-white/30 transition-colors group-hover:text-white/50">24/7 email support</p>
+                  <p className="text-[13px] font-semibold leading-none text-foreground">support@revoxera.com</p>
+                  <p className="mt-1 text-[11px] text-foreground/40 transition-colors group-hover:text-foreground/60">24/7 email support</p>
                 </div>
               </a>
 
@@ -130,22 +130,22 @@ export default function Footer() {
 
           {/* Col 3: Hivemind Sync (3 cols) */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-500">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
               <Cpu className="w-3.5 h-3.5" />
               Sync with Hivemind
             </div>
-            <p className="text-xs text-white/40 leading-relaxed">
+            <p className="text-xs text-foreground/50 leading-relaxed">
               Connect to our weekly neural newsletter for top performing prompt sequences, tokens, and model configurations.
             </p>
             <div className="space-y-2">
               <input
                 type="email"
                 placeholder="neural-address@domain.com"
-                className="w-full text-xs bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-white placeholder-white/25 focus:outline-none focus:border-amber-500/50"
+                className="w-full text-xs bg-foreground/5 border border-glass-border rounded-xl px-3 py-2.5 text-foreground placeholder-foreground/45 focus:outline-none focus:border-primary/50"
                 suppressHydrationWarning
               />
               <button
-                className="w-full py-2.5 bg-[#0c0c14] text-white border border-white/10 rounded-xl text-xs font-bold hover:bg-[#161622] transition-colors duration-200 cursor-pointer"
+                className="w-full py-2.5 bg-primary text-white border border-glass-border rounded-xl text-xs font-bold hover:bg-primary/95 transition-colors duration-200 cursor-pointer"
                 suppressHydrationWarning
               >
                 Establish Protocol Sync
@@ -156,14 +156,14 @@ export default function Footer() {
         </div>
 
         {/* Middle Divider */}
-        <div className="h-px bg-white/10 my-10" />
+        <div className="h-px bg-glass-border my-10" />
 
         {/* Link columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
             <div key={category} className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-amber-500 flex items-center gap-1.5">
-                <Radio className="w-3 h-3 text-amber-500/70" />
+              <h4 className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+                <Radio className="w-3 h-3 text-primary/70" />
                 {category}
               </h4>
               <ul className="space-y-2.5">
@@ -171,7 +171,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-xs text-white/50 hover:text-amber-400 transition-colors duration-200 font-medium"
+                      className="text-xs text-foreground/60 hover:text-primary transition-colors duration-200 font-medium"
                     >
                       {link.label}
                     </Link>
@@ -183,8 +183,8 @@ export default function Footer() {
 
           {/* Office Column */}
           <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-amber-500 flex items-center gap-1.5">
-              <Radio className="w-3 h-3 text-amber-500/70" />
+            <h4 className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+              <Radio className="w-3 h-3 text-primary/70" />
               Office
             </h4>
             <div className="flex items-start gap-2.5">
@@ -199,18 +199,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-white/5">
-          <p className="text-xs text-white/30" suppressHydrationWarning>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-glass-border">
+          <p className="text-xs text-foreground/40" suppressHydrationWarning>
             © {new Date().getFullYear()} Revoxera. Neural Architecture Sync v4.8.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 sm:justify-end">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               All Systems Operational
             </span>
 
-            <div className="flex items-center gap-2 text-[11px] font-medium text-white/20">
-              <Shield size={11} className="text-violet-400/30" />
+            <div className="flex items-center gap-2 text-[11px] font-medium text-foreground/30">
+              <Shield size={11} className="text-primary/30" />
               Secure payments
             </div>
 
@@ -231,7 +231,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-amber-500/30 transition-all duration-350"
+                  className="w-8 h-8 rounded-lg bg-foreground/5 border border-glass-border flex items-center justify-center text-foreground/45 hover:text-foreground hover:bg-foreground/10 hover:border-primary transition-all duration-350"
                 >
                   {s.icon}
                 </a>

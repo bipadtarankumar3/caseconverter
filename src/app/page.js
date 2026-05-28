@@ -131,7 +131,7 @@ export default function CaseConverterHome() {
                 </div>
                 {icon}
               </div>
-              <p className="text-xl md:text-2xl leading-relaxed text-slate-200 italic relative z-10 before:content-[open-quote] before:absolute before:-top-5 before:-left-5 before:text-7xl before:text-primary/30">
+              <p className="text-xl md:text-2xl leading-relaxed text-slate-700 italic relative z-10 before:content-[open-quote] before:absolute before:-top-5 before:-left-5 before:text-7xl before:text-primary/30">
                 &ldquo;{quote}&rdquo;
               </p>
               <div className="flex items-center gap-4 mt-auto">

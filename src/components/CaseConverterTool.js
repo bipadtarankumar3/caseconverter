@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Copy, Share2, Download, Trash2,
   Check, Hash, FileText, Type, Link2,
-  History, X, Keyboard, ChevronDown,
+  History, X, Keyboard, ChevronDown, ChevronLeft, ChevronRight,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -99,10 +100,53 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
   const [showHistory, setShowHistory] = useState(false);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [history, setHistory] = useState([]);
+  const [mounted, setMounted] = useState(false);
   const textareaRef = useRef(null);
+
+  const scrollRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const checkScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkScroll);
+      // Run once initially
+      checkScroll();
+      // Handle window resize
+      window.addEventListener('resize', checkScroll);
+      // Run checking after a short delay to ensure rendering completes
+      const t = setTimeout(checkScroll, 100);
+      return () => {
+        el.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+        clearTimeout(t);
+      };
+    }
+  }, [checkScroll]);
+
+  const handleScroll = (direction) => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = clientWidth * 0.75;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   // Load history + parse URL params on mount
   useEffect(() => {
+    setMounted(true);
     setHistory(loadHistory());
 
     if (typeof window !== 'undefined') {
@@ -265,15 +309,18 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
         </div>
 
         {/* Conversion buttons */}
-        <div className="p-4 md:p-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-11 gap-3">
+        <div className="p-4 md:p-5 relative group/scroll">
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-3 py-2 scrollbar-premium scroll-smooth select-none pb-4"
+          >
             {modesDisplay.map((btn) => (
               <button
                 key={btn.id}
                 suppressHydrationWarning
                 onClick={() => applyConversion(btn.id)}
                 aria-label={`Convert to ${btn.label}`}
-                className={`group relative overflow-hidden flex items-center justify-start gap-2.5 p-3 bg-white/[0.03] border rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(56,189,248,0.3)]
+                className={`group shrink-0 relative overflow-hidden flex items-center justify-start gap-2.5 p-3 bg-white/[0.03] border rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_var(--primary-glow)]
                   ${initialMode === btn.id ? 'border-primary/50 bg-white/[0.06] text-white' : 'border-white/10 hover:border-primary'}`}
               >
                 <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-[10px] uppercase font-black text-white shrink-0 bg-gradient-to-br ${btn.color}`}>
@@ -284,6 +331,28 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
               </button>
             ))}
           </div>
+
+          {/* Left Arrow */}
+          {showLeftArrow && (
+            <button
+              onClick={() => handleScroll('left')}
+              className="absolute left-2 top-[calc(50%-8px)] -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-background border border-glass-border shadow-lg text-foreground hover:bg-secondary hover:text-primary transition-all"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={18} />
+            </button>
+          )}
+
+          {/* Right Arrow */}
+          {showRightArrow && (
+            <button
+              onClick={() => handleScroll('right')}
+              className="absolute right-2 top-[calc(50%-8px)] -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-background border border-glass-border shadow-lg text-foreground hover:bg-secondary hover:text-primary transition-all"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={18} />
+            </button>
+          )}
         </div>
       </div>
 
@@ -320,9 +389,9 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
       )}
 
       {/* ── Keyboard Shortcuts Modal ── */}
-      {showShortcuts && (
+      {showShortcuts && mounted && createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowShortcuts(false)}>
-          <div className="bg-[#0a0a14] border border-white/10 rounded-[28px] p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+          <div className="bg-background border border-glass-border rounded-[28px] p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-black text-white text-xl flex items-center gap-2"><Keyboard size={20} className="text-primary" /> Keyboard Shortcuts</h3>
               <button onClick={() => setShowShortcuts(false)} className="text-muted hover:text-white transition-colors"><X size={20} /></button>
@@ -345,7 +414,8 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
             </ul>
             <p className="text-xs text-muted mt-6 text-center">Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white text-[10px] font-mono">Esc</kbd> to close</p>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --primary: #38bdf8;
-  --primary-glow: rgba(56, 189, 248, 0.4);
-  --secondary: #0f172a;
-  --accent: #8b5cf6;
-  --accent-glow: rgba(139, 92, 246, 0.4);
+  --background: #fcfdfc;
+  --foreground: #0f172a;
+  --primary: #10b981; /* Premium green */
+  --primary-glow: rgba(16, 185, 129, 0.15);
+  --secondary: #f0fdf4; /* Light green tint secondary */
+  --accent: #059669; /* Deeper emerald accent */
+  --accent-glow: rgba(5, 150, 105, 0.15);
   --success: #10b981;
-  --glass: rgba(15, 23, 42, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.1);
-  --text-muted: #94a3b8;
-  --shadow-premium: 0 0 50px -12px rgba(0, 0, 0, 0.5);
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(16, 185, 129, 0.15);
+  --border: rgba(15, 23, 42, 0.08);
+  --text-muted: #475569;
+  --shadow-premium: 0 20px 45px -15px rgba(16, 185, 129, 0.08), 0 0 50px -12px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -46,8 +46,8 @@ body {
   height: 600px;
   border-radius: 50%;
   z-index: -1;
-  filter: blur(80px);
-  opacity: 0.5;
+  filter: blur(120px);
+  opacity: 0.12;
   animation: blob-float 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
 }
 
@@ -75,7 +75,7 @@ body {
   left: 10%; 
   width: 400px; 
   height: 400px; 
-  background: radial-gradient(circle, #f472b6 0%, transparent 70%); 
+  background: radial-gradient(circle, #34d399 0%, transparent 70%); 
   animation-delay: -8s;
 }
 
@@ -83,11 +83,11 @@ body {
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--background); }
 ::-webkit-scrollbar-thumb { 
-  background: #1e293b; 
+  background: #cbd5e1; 
   border-radius: 10px;
   border: 2px solid var(--background);
 }
-::-webkit-scrollbar-thumb:hover { background: #334155; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
 /* Custom Animations */
 @keyframes fadeInUp {
@@ -100,11 +100,160 @@ body {
 }
 
 @keyframes pulse-glow {
-  0% { filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.4)); transform: scale(1); }
-  50% { filter: drop-shadow(0 0 15px #38bdf8); transform: scale(1.05); }
-  100% { filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.4)); transform: scale(1); }
+  0% { filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.4)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 15px #10b981); transform: scale(1.05); }
+  100% { filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.4)); transform: scale(1); }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* ── Light theme overrides for hardcoded Tailwind classes ── */
+
+.text-white {
+  color: var(--foreground) !important;
+}
+.text-white\/95 { color: rgba(15, 23, 42, 0.95) !important; }
+.text-white\/90 { color: rgba(15, 23, 42, 0.90) !important; }
+.text-white\/80 { color: rgba(15, 23, 42, 0.80) !important; }
+.text-white\/70 { color: rgba(15, 23, 42, 0.70) !important; }
+.text-white\/60 { color: rgba(15, 23, 42, 0.60) !important; }
+.text-white\/50 { color: rgba(15, 23, 42, 0.50) !important; }
+.text-white\/45 { color: rgba(15, 23, 42, 0.45) !important; }
+.text-white\/40 { color: rgba(15, 23, 42, 0.40) !important; }
+.text-white\/30 { color: rgba(15, 23, 42, 0.30) !important; }
+.text-white\/25 { color: rgba(15, 23, 42, 0.25) !important; }
+.text-white\/20 { color: rgba(15, 23, 42, 0.20) !important; }
+.text-white\/10 { color: rgba(15, 23, 42, 0.10) !important; }
+.text-white\/5 { color: rgba(15, 23, 42, 0.05) !important; }
+
+/* Ensure white color remains for elements where it is required (buttons, badges) */
+.bg-primary .text-white,
+.bg-gradient-to-br .text-white,
+kbd.text-white,
+button.text-white,
+span.bg-gradient-to-br.text-white,
+button.bg-primary.text-slate-950,
+.text-slate-950,
+.bg-primary .text-slate-950 {
+  color: #ffffff !important;
+}
+
+/* Text area input field text styling */
+textarea.text-white {
+  color: var(--foreground) !important;
+}
+textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Text gradient overrides from-white to-muted */
+.from-white.to-muted {
+  --tw-gradient-from: var(--foreground) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: var(--text-muted) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* Borders */
+.border-white\/10 {
+  border-color: var(--glass-border) !important;
+}
+.border-white\/5 {
+  border-color: rgba(15, 23, 42, 0.05) !important;
+}
+.border-white\/20 {
+  border-color: var(--glass-border) !important;
+}
+
+/* Backgrounds */
+.bg-white\/\[0\.02\] {
+  background-color: rgba(15, 23, 42, 0.015) !important;
+}
+.bg-white\/\[0\.03\] {
+  background-color: rgba(15, 23, 42, 0.03) !important;
+}
+.bg-white\/\[0\.04\] {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+.bg-white\/\[0\.05\] {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+.bg-white\/\[0\.06\] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+.bg-white\/\[0\.08\] {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+.bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+}
+.bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.1) !important;
+}
+.hover\:bg-white\/10:hover {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+.hover\:bg-white\/\[0\.08\]:hover {
+  background-color: rgba(15, 23, 42, 0.08) !important;
+}
+.hover\:bg-white\/\[0\.06\]:hover {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* kbd background/borders */
+kbd {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+  color: var(--foreground) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* History lists scrollbar overrides */
+.divide-white\/5 > * + * {
+  border-color: rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Custom glow adjustments for active elements */
+.text-primary {
+  color: var(--primary) !important;
+}
+
+/* Ensure transparent overlays stay transparent */
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+/* Hover color adjustments for light context */
+.hover\:text-white:hover {
+  color: var(--primary) !important; /* Elegant green hover on links */
+}
+
+.group:hover .group-hover\:text-white {
+  color: var(--primary) !important;
+}
+
+/* Prevent primary buttons and elements with solid background from losing white text on hover */
+.bg-primary.hover\:text-white:hover,
+.bg-primary .hover\:text-white:hover,
+button.bg-primary:hover,
+button.bg-primary:hover *,
+.bg-gradient-to-br.hover\:text-white:hover,
+.bg-gradient-to-br:hover .hover\:text-white {
+  color: #ffffff !important;
+}
+
+/* Custom premium scrollbar for horizontal containers */
+.scrollbar-premium::-webkit-scrollbar {
+  height: 6px;
+}
+.scrollbar-premium::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.03);
+  border-radius: 10px;
+}
+.scrollbar-premium::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+.scrollbar-premium::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
