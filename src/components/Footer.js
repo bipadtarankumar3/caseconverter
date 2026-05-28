@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { GitBranch, X as XIcon, Link2, PlaySquare, Cpu, Radio, Activity, Terminal, Mail, Phone, MapPin, Shield } from "lucide-react";
+import { GitBranch, X as XIcon, Link2, Cpu, Radio, Activity, Terminal, Mail, Phone, MapPin, Shield } from "lucide-react";
 import Link from "next/link";
 
 const FOOTER_LINKS = {
@@ -35,10 +35,9 @@ const FOOTER_LINKS = {
 };
 
 const SOCIAL = [
-  { icon: <XIcon className="w-4 h-4" />, href: "#", label: "X (Twitter)" },
-  { icon: <GitBranch className="w-4 h-4" />, href: "https://github.com", label: "GitHub" },
-  { icon: <Link2 className="w-4 h-4" />, href: "#", label: "LinkedIn" },
-  { icon: <PlaySquare className="w-4 h-4" />, href: "#", label: "YouTube" },
+  { icon: <XIcon className="w-4 h-4" />, href: "https://x.com/revoxera", label: "X (Twitter)" },
+  { icon: <GitBranch className="w-4 h-4" />, href: "https://github.com/revoxera", label: "GitHub" },
+  { icon: <Link2 className="w-4 h-4" />, href: "https://www.linkedin.com/in/revoxera-digital", label: "LinkedIn" },
 ];
 
 /* Clean SVG payment logos */
@@ -229,6 +228,8 @@ export default function Footer() {
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-amber-500/30 transition-all duration-350"
                 >

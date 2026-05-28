@@ -36,7 +36,7 @@ export default function ContactPage() {
           <p className="text-muted text-xs mt-1">We respond within 24–48 hours</p>
         </a>
 
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+        <a href="https://github.com/revoxera" target="_blank" rel="noopener noreferrer"
           className="group p-8 bg-white/[0.02] border border-white/10 rounded-[28px] hover:border-primary hover:-translate-y-1 transition-all">
           <div className="w-12 h-12 rounded-2xl bg-white/5 text-white flex items-center justify-center mb-6 text-xl group-hover:bg-white/10 transition-colors">
             🐙

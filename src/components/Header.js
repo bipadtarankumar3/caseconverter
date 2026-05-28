@@ -97,7 +97,7 @@ export default function Header() {
 
           {/* CTA */}
           <Link
-            href="https://github.com"
+            href="https://github.com/revoxera"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2.5 bg-white/5 hover:bg-white/10 px-5 py-2.5 rounded-2xl border border-white/10 hover:border-primary transition-all hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] font-semibold w-full md:w-auto justify-center"
