@@ -6,18 +6,29 @@ import Link from "next/link";
 
 const FOOTER_LINKS = {
   "Tools": [
+    { label: "Title Case Converter", href: "/tools/title-case" },
+    { label: "Sentence Case Converter", href: "/tools/sentence-case" },
+    { label: "UPPER CASE Converter", href: "/tools/uppercase-converter" },
+    { label: "lowercase Converter", href: "/tools/lowercase-converter" },
+    { label: "camelCase Generator", href: "/tools/camel-case-generator" },
+    { label: "PascalCase Generator", href: "/tools/pascal-case-generator" },
+    { label: "snake_case Generator", href: "/tools/snake-case-generator" },
+    { label: "kebab-case Generator", href: "/tools/kebab-case-generator" },
+  ],
+  "Guides": [
+    { label: "APA Title Case Rules", href: "/guides/apa-title-case" },
+    { label: "Naming Conventions", href: "/guides/naming-conventions" },
+    { label: "Sentence vs Title Case", href: "/guides/sentence-case-vs-title-case" },
+  ],
+  "Other Tools": [
     { label: "AI Prompt Generator", href: "http://aiprompt.revoxera.com" },
     { label: "SQL Formatter", href: "http://sqlformatter.revoxera.com" },
     { label: "JSON Formatter", href: "http://jsonformatter.revoxera.com" },
     { label: "Color Code Tool", href: "http://colorcode.revoxera.com" },
-    { label: "Case Converter", href: "http://caseconverter.revoxera.com" },
   ],
   "Company": [
-    // { label: "Careers", href: "/careers" },
-    // { label: "Our Blog", href: "/blog" },
-    { label: "Affiliates", href: "#" },
-  ],
-  "Legal": [
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms & Conditions", href: "/terms" },
   ],
