@@ -11,6 +11,7 @@ module.exports = {
         foreground: "var(--foreground)",
         primary: {
           DEFAULT: "var(--primary)",
+          hover: "var(--primary-hover)",
           glow: "var(--primary-glow)",
         },
         secondary: "var(--secondary)",
@@ -26,22 +27,9 @@ module.exports = {
         }
       },
       boxShadow: {
-        premium: "var(--shadow-premium)",
+        xs: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        premium: "0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)",
       },
-      animation: {
-        'pulse-glow': 'pulse-glow 3s infinite ease-in-out',
-        'blob-float': 'blob-float 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1)',
-      },
-      keyframes: {
-        'pulse-glow': {
-          '0%, 100%': { filter: 'drop-shadow(0 0 5px rgba(56, 189, 248, 0.4))', transform: 'scale(1)' },
-          '50%': { filter: 'drop-shadow(0 0 15px #38bdf8)', transform: 'scale(1.05)' },
-        },
-        'blob-float': {
-          '0%': { transform: 'translate(0, 0) scale(1)' },
-          '100%': { transform: 'translate(50px, 100px) scale(1.1)' },
-        }
-      }
     },
   },
   plugins: [],

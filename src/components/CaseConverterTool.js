@@ -256,63 +256,63 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
   return (
     <div className="relative">
       {/* ── Main Card ── */}
-      <div className="bg-glass backdrop-blur-2xl border border-white/10 rounded-[32px] shadow-premium overflow-hidden">
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
         
         {/* Text area */}
-        <div className="p-4 md:p-10 pb-5">
+        <div className="p-4 md:p-6 pb-3">
           <label htmlFor="text-input" className="sr-only">Enter text to convert</label>
           <textarea
             id="text-input"
             ref={textareaRef}
             placeholder="Type or paste your content here to transform it instantly..."
-            className="w-full h-[180px] bg-transparent border-none text-white text-lg md:text-2xl resize-none outline-none leading-relaxed font-normal placeholder:text-white/20"
+            className="w-full h-[180px] md:h-[220px] bg-slate-50/50 border border-slate-200 rounded-xl p-4 text-slate-900 text-base md:text-lg resize-y outline-none leading-relaxed font-normal placeholder:text-slate-400 focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10 transition-all"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
         </div>
 
         {/* Toolbar */}
-        <div className="flex flex-col md:flex-row justify-between items-center p-2 md:px-10 md:py-2 bg-white/[0.02] border-t border-b border-white/10 gap-4">
-          <div className="flex gap-2 flex-wrap">
-            <button suppressHydrationWarning onClick={handleCopy} title="Copy (Ctrl+Enter)" aria-label="Copy to clipboard"
-              className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5">
-              {copied ? <Check size={20} className="text-green-400" /> : <Copy size={20} />}
+        <div className="flex flex-col sm:flex-row justify-between items-center px-4 md:px-6 py-2.5 bg-slate-50/80 border-t border-b border-slate-200 gap-3">
+          <div className="flex gap-2 flex-wrap items-center">
+            <button suppressHydrationWarning onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard"
+              className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
+              {copied ? <Check size={18} className="text-emerald-600" /> : <Copy size={18} />}
             </button>
             <button suppressHydrationWarning onClick={handleShareLink} title="Copy shareable link" aria-label="Share link"
-              className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5">
-              {linkCopied ? <Check size={20} className="text-green-400" /> : <Link2 size={20} />}
+              className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
+              {linkCopied ? <Check size={18} className="text-emerald-600" /> : <Link2 size={18} />}
             </button>
             <button suppressHydrationWarning onClick={handleDownload} title="Download as .txt" aria-label="Download as text file"
-              className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5">
-              <Download size={20} />
+              className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
+              <Download size={18} />
             </button>
             <button suppressHydrationWarning onClick={handleClear} title="Clear text" aria-label="Clear all text"
-              className="text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5">
-              <Trash2 size={20} />
+              className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-red-600 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
+              <Trash2 size={18} />
             </button>
             <button suppressHydrationWarning onClick={() => setShowHistory(!showHistory)} title="Conversion history" aria-label="Show history"
-              className={`text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5 ${showHistory ? 'border-white/10 text-primary' : ''}`}>
-              <History size={20} />
+              className={`text-slate-600 p-2 rounded-lg bg-white border transition-all shadow-xs flex items-center justify-center ${showHistory ? 'border-emerald-500 text-emerald-600 bg-emerald-50/40' : 'border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300'}`}>
+              <History size={18} />
             </button>
             <button suppressHydrationWarning onClick={() => setShowShortcuts(!showShortcuts)} title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts"
-              className={`text-muted p-2.5 rounded-xl bg-white/[0.03] border border-transparent hover:bg-white/[0.08] hover:text-primary hover:border-white/10 transition-all hover:-translate-y-0.5 ${showShortcuts ? 'border-white/10 text-primary' : ''}`}>
-              <Keyboard size={20} />
+              className={`text-slate-600 p-2 rounded-lg bg-white border transition-all shadow-xs flex items-center justify-center ${showShortcuts ? 'border-emerald-500 text-emerald-600 bg-emerald-50/40' : 'border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300'}`}>
+              <Keyboard size={18} />
             </button>
           </div>
 
           {/* Stats */}
-          <div className="flex gap-4 md:gap-8 text-sm text-muted">
-            <div className="flex items-center gap-2"><Hash size={16} /> <span><strong className="text-white text-lg">{stats.chars}</strong> Chars</span></div>
-            <div className="flex items-center gap-2"><Type size={16} /> <span><strong className="text-white text-lg">{stats.words}</strong> Words</span></div>
-            <div className="flex items-center gap-2"><FileText size={16} /> <span><strong className="text-white text-lg">{stats.lines}</strong> Lines</span></div>
+          <div className="flex gap-4 md:gap-6 text-xs text-slate-500">
+            <div className="flex items-center gap-1.5"><Hash size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.chars}</strong> Chars</span></div>
+            <div className="flex items-center gap-1.5"><Type size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.words}</strong> Words</span></div>
+            <div className="flex items-center gap-1.5"><FileText size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.lines}</strong> Lines</span></div>
           </div>
         </div>
 
         {/* Conversion buttons */}
-        <div className="p-4 md:p-5 relative group/scroll">
+        <div className="p-3 md:p-4 relative group/scroll bg-slate-50/40">
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-3 py-2 scrollbar-premium scroll-smooth select-none pb-4"
+            className="flex overflow-x-auto gap-2.5 py-1 scrollbar-premium scroll-smooth select-none"
           >
             {modesDisplay.map((btn) => (
               <button
@@ -320,14 +320,15 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
                 suppressHydrationWarning
                 onClick={() => applyConversion(btn.id)}
                 aria-label={`Convert to ${btn.label}`}
-                className={`group shrink-0 relative overflow-hidden flex items-center justify-start gap-2.5 p-3 bg-white/[0.03] border rounded-2xl text-muted font-bold text-sm hover:bg-white/[0.08] hover:text-white transition-all hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_var(--primary-glow)]
-                  ${initialMode === btn.id ? 'border-primary/50 bg-white/[0.06] text-white' : 'border-white/10 hover:border-primary'}`}
+                className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl font-semibold text-xs transition-all shadow-xs active:scale-95 border
+                  ${initialMode === btn.id
+                    ? 'border-emerald-500 bg-emerald-50 text-emerald-800 shadow-xs'
+                    : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900'}`}
               >
-                <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-[10px] uppercase font-black text-white shrink-0 bg-gradient-to-br ${btn.color}`}>
+                <span className={`w-6 h-6 flex items-center justify-center rounded-lg text-[10px] uppercase font-black text-white shrink-0 bg-gradient-to-br ${btn.color} shadow-xs`}>
                   {btn.prefix}
                 </span>
-                <span className="text-xs leading-tight">{btn.label}</span>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 bg-white/10 rounded-full group-hover:w-[300px] group-hover:h-[300px] transition-all duration-700 pointer-events-none" />
+                <span className="leading-tight">{btn.label}</span>
               </button>
             ))}
           </div>
@@ -336,10 +337,10 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
           {showLeftArrow && (
             <button
               onClick={() => handleScroll('left')}
-              className="absolute left-2 top-[calc(50%-8px)] -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-background border border-glass-border shadow-lg text-foreground hover:bg-secondary hover:text-primary transition-all"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white border border-slate-200 shadow-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all"
               aria-label="Scroll left"
             >
-              <ChevronLeft size={18} />
+              <ChevronLeft size={16} />
             </button>
           )}
 
@@ -347,10 +348,10 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
           {showRightArrow && (
             <button
               onClick={() => handleScroll('right')}
-              className="absolute right-2 top-[calc(50%-8px)] -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-background border border-glass-border shadow-lg text-foreground hover:bg-secondary hover:text-primary transition-all"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white border border-slate-200 shadow-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all"
               aria-label="Scroll right"
             >
-              <ChevronRight size={18} />
+              <ChevronRight size={16} />
             </button>
           )}
         </div>
@@ -358,29 +359,29 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
 
       {/* ── History Panel ── */}
       {showHistory && (
-        <div className="mt-4 bg-glass backdrop-blur-2xl border border-white/10 rounded-[24px] overflow-hidden">
-          <div className="flex items-center justify-between p-5 border-b border-white/10">
-            <h3 className="font-bold text-white flex items-center gap-2"><History size={18} className="text-primary" /> Conversion History</h3>
+        <div className="mt-4 bg-white border border-slate-200 rounded-2xl shadow-lg overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50/60">
+            <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2"><History size={16} className="text-emerald-600" /> Conversion History</h3>
             <div className="flex gap-2">
               {history.length > 0 && (
-                <button onClick={clearHistory} className="text-xs text-muted hover:text-red-400 transition-colors px-3 py-1 rounded-lg bg-white/[0.03]">Clear all</button>
+                <button onClick={clearHistory} className="text-xs text-slate-500 hover:text-red-600 transition-colors px-2.5 py-1 rounded-lg bg-white border border-slate-200">Clear all</button>
               )}
-              <button onClick={() => setShowHistory(false)} className="text-muted hover:text-white transition-colors p-1"><X size={18} /></button>
+              <button onClick={() => setShowHistory(false)} className="text-slate-500 hover:text-slate-800 transition-colors p-1"><X size={16} /></button>
             </div>
           </div>
           {history.length === 0 ? (
-            <p className="text-muted text-center py-8 text-sm">No conversions yet. Start converting text above.</p>
+            <p className="text-slate-500 text-center py-6 text-xs">No conversions yet. Start converting text above.</p>
           ) : (
-            <ul className="divide-y divide-white/5 max-h-72 overflow-y-auto">
+            <ul className="divide-y divide-slate-100 max-h-64 overflow-y-auto">
               {history.map((entry) => (
                 <li key={entry.id}
                   onClick={() => restoreFromHistory(entry)}
-                  className="flex items-start justify-between gap-4 p-4 hover:bg-white/[0.03] cursor-pointer transition-colors group">
+                  className="flex items-start justify-between gap-4 p-3 hover:bg-slate-50 cursor-pointer transition-colors group">
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs text-muted mb-1">{entry.modeLabel} · {new Date(entry.time).toLocaleTimeString()}</p>
-                    <p className="text-sm text-white truncate">{entry.result}</p>
+                    <p className="text-[11px] text-slate-500 mb-0.5">{entry.modeLabel} · {new Date(entry.time).toLocaleTimeString()}</p>
+                    <p className="text-xs text-slate-900 font-mono truncate">{entry.result}</p>
                   </div>
-                  <span className="text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-1">Restore →</span>
+                  <span className="text-xs text-emerald-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5">Restore →</span>
                 </li>
               ))}
             </ul>
@@ -390,29 +391,29 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
 
       {/* ── Keyboard Shortcuts Modal ── */}
       {showShortcuts && mounted && createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setShowShortcuts(false)}>
-          <div className="bg-background border border-glass-border rounded-[28px] p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-black text-white text-xl flex items-center gap-2"><Keyboard size={20} className="text-primary" /> Keyboard Shortcuts</h3>
-              <button onClick={() => setShowShortcuts(false)} className="text-muted hover:text-white transition-colors"><X size={20} /></button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs" onClick={() => setShowShortcuts(false)}>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <h3 className="font-bold text-slate-900 text-base flex items-center gap-2"><Keyboard size={18} className="text-emerald-600" /> Keyboard Shortcuts</h3>
+              <button onClick={() => setShowShortcuts(false)} className="text-slate-400 hover:text-slate-700 transition-colors"><X size={18} /></button>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {SHORTCUTS.map((s) => (
-                <li key={s.mode} className="flex items-center justify-between">
-                  <span className="text-muted text-sm">{s.label}</span>
+                <li key={s.mode} className="flex items-center justify-between text-xs">
+                  <span className="text-slate-600 font-medium">{s.label}</span>
                   <div className="flex gap-1">
                     {s.keys.map((k) => (
-                      <kbd key={k} className="px-2 py-1 rounded-lg bg-white/10 border border-white/10 text-white text-xs font-mono">{k}</kbd>
+                      <kbd key={k} className="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-[11px] font-mono font-medium">{k}</kbd>
                     ))}
                   </div>
                 </li>
               ))}
-              <li className="flex items-center justify-between pt-2 border-t border-white/10">
-                <span className="text-muted text-sm">Toggle shortcuts</span>
-                <kbd className="px-2 py-1 rounded-lg bg-white/10 border border-white/10 text-white text-xs font-mono">?</kbd>
+              <li className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                <span className="text-slate-600 font-medium">Toggle shortcuts</span>
+                <kbd className="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-800 text-[11px] font-mono font-medium">?</kbd>
               </li>
             </ul>
-            <p className="text-xs text-muted mt-6 text-center">Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white text-[10px] font-mono">Esc</kbd> to close</p>
+            <p className="text-[11px] text-slate-400 mt-4 text-center">Press <kbd className="px-1 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-mono">Esc</kbd> to close</p>
           </div>
         </div>,
         document.body

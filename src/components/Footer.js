@@ -1,177 +1,80 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { GitBranch, X as XIcon, Link2, Cpu, Radio, Activity, Terminal, Mail, Phone, MapPin, Shield } from "lucide-react";
-import Link from "next/link";
+import { GitBranch, X as XIcon, Link2, ShieldCheck, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 const FOOTER_LINKS = {
-  "Tools": [
-    { label: "Title Case Converter", href: "/tools/title-case" },
-    { label: "Sentence Case Converter", href: "/tools/sentence-case" },
-    { label: "UPPER CASE Converter", href: "/tools/uppercase-converter" },
-    { label: "lowercase Converter", href: "/tools/lowercase-converter" },
-    { label: "camelCase Generator", href: "/tools/camel-case-generator" },
-    { label: "PascalCase Generator", href: "/tools/pascal-case-generator" },
-    { label: "snake_case Generator", href: "/tools/snake-case-generator" },
-    { label: "kebab-case Generator", href: "/tools/kebab-case-generator" },
+  'Tools': [
+    { label: 'Title Case Converter', href: '/tools/title-case' },
+    { label: 'Sentence Case Converter', href: '/tools/sentence-case' },
+    { label: 'UPPER CASE Converter', href: '/tools/uppercase-converter' },
+    { label: 'lowercase Converter', href: '/tools/lowercase-converter' },
+    { label: 'camelCase Generator', href: '/tools/camel-case-generator' },
+    { label: 'PascalCase Generator', href: '/tools/pascal-case-generator' },
+    { label: 'snake_case Generator', href: '/tools/snake-case-generator' },
+    { label: 'kebab-case Generator', href: '/tools/kebab-case-generator' },
   ],
-  "Guides": [
-    { label: "APA Title Case Rules", href: "/guides/apa-title-case" },
-    { label: "Naming Conventions", href: "/guides/naming-conventions" },
-    { label: "Sentence vs Title Case", href: "/guides/sentence-case-vs-title-case" },
+  'Guides': [
+    { label: 'APA Title Case Rules', href: '/guides/apa-title-case' },
+    { label: 'Naming Conventions', href: '/guides/naming-conventions' },
+    { label: 'Sentence vs Title Case', href: '/guides/sentence-case-vs-title-case' },
   ],
-  "Other Tools": [
-    { label: "AI Prompt Generator", href: "http://aiprompt.revoxera.com" },
-    { label: "SQL Formatter", href: "http://sqlformatter.revoxera.com" },
-    { label: "JSON Formatter", href: "http://jsonformatter.revoxera.com" },
-    { label: "Color Code Tool", href: "http://colorcode.revoxera.com" },
+  'Other Tools': [
+    { label: 'AI Prompt Generator', href: 'https://aiprompt.revoxera.com' },
+    { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com' },
+    { label: 'JSON Formatter', href: 'https://jsonformatter.revoxera.com' },
+    { label: 'Color Code Tool', href: 'https://colorcode.revoxera.com' },
   ],
-  "Company": [
-    { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms & Conditions", href: "/terms" },
+  'Company': [
+    { label: 'About Us', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms & Conditions', href: '/terms' },
   ],
 };
 
 const SOCIAL = [
-  { icon: <XIcon className="w-4 h-4" />, href: "https://x.com/revoxera", label: "X (Twitter)" },
-  { icon: <GitBranch className="w-4 h-4" />, href: "https://github.com/revoxera", label: "GitHub" },
-  { icon: <Link2 className="w-4 h-4" />, href: "https://www.linkedin.com/in/revoxera-digital", label: "LinkedIn" },
+  { icon: <XIcon className="w-4 h-4" />, href: 'https://x.com/revoxera', label: 'X (Twitter)' },
+  { icon: <GitBranch className="w-4 h-4" />, href: 'https://github.com/revoxera', label: 'GitHub' },
+  { icon: <Link2 className="w-4 h-4" />, href: 'https://www.linkedin.com/in/revoxera-digital', label: 'LinkedIn' },
 ];
 
-/* Clean SVG payment logos */
-const PaymentLogo = ({ viewBox, path, width = 32 }) => (
-  <svg
-    width={width}
-    height="20"
-    viewBox={viewBox}
-    fill="currentColor"
-    className="text-white/20 transition-colors duration-500 hover:text-white/40"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d={path} />
-  </svg>
-);
-
-const logos = {
-  visa: { viewBox: "0 0 32 10", path: "M13.2 0l-2.1 9.9h3.3L16.5 0h-3.3z M22.7 0c-.8 0-2.1.2-3 .7l-.5 2.5c.3-.2.8-.3 1.3-.3 1 0 1.2.3 1.2.9 0 1.3-1.8 1.4-1.8 3 0 .7.6 1.3 1.6 1.3.8 0 1.6-.2 2.2-.5l.4-2c-.3.2-.9.4-1.4.4-.7 0-1-.3-1-1 0-1.1 1.8-1.5 1.8-3C23.5.7 23.3 0 22.7 0M10.1 0L6.7 6.8 5.4.9C5.2.3 4.8 0 4 0H0l.1.3c.8.2 1.6.5 2 1 l1.7 8.6h3.4l5.1-9.9h-2.1z M27.1 0h-2.6c-.6 0-1 .3-1.2.9L19.4 9.9h3.4l.7-1.9h4.1l.4 1.9h3L27.1 0z m-2.8 5.7l1.3-3.6h.1l.6 3.6h-2z" },
-  mastercard: { viewBox: "0 0 32 20", path: "M10.7 10A6.3 6.3 0 0 1 13 4.9a6.6 6.6 0 0 0 0 10.2 6.3 6.3 0 0 1-2.3 5.1z M6.7 3.3a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4z M19.3 3.3a6.7 6.7 0 1 0 0 13.4 6.7 6.7 0 0 0 0-13.4z" },
-  paypal: { viewBox: "0 0 32 32", path: "M26.3 9.4c0-3.3-2.6-5.4-6.8-5.4H11.2c-.6 0-1 .4-1.1 1L7 26.6c0 .4.4.7.7.7h4.8l1-6.1c0-.4.5-.6.9-.6h2.8c4 0 7-1.8 8-5.3.4-1.3.5-2.5.5-3.6zM22.5 15c-.6 2.3-2.7 3.4-5.5 3.4h-2l-1.3 8H9l2-13h5.6c2.4 0 4.1.8 4.7 2.6.2.7.2 1.4.2 2.2z" },
-  amex: { viewBox: "0 0 32 32", path: "M30.6 9.4H1.4C.6 9.4 0 10 0 10.8v10.4c0 .8.6 1.4 1.4 1.4h29.2c.8 0 1.4-.6 1.4-1.4V10.8c0-.8-.6-1.4-1.4-1.4zM7 19.3L5.4 15l-1.6 4.3H2L5.4 11h.1l3.5 8.3H7zm9.4 0L14.7 15v4.3h-1.6V11h2l1.3 3.8L17.7 11h2v8.3h-1.6v-4.3l-1.7 4.3zm6.6 0v-1.7h-2.5V16h2.3v-1.6h-2.3v-1.6h2.7v-1.7h-4.4v8.3h4.2zm6.2 0l-1.5-2.6-1.5 2.6h-1.9l2.4-4.2-2.3-4.1h2l1.4 2.6 1.4-2.6h1.9l-2.4 4.1 2.4 4.2h-1.9zM5.5 12.3L4.4 15h2l-1-2.7z" },
-};
-
 export default function Footer() {
-  const [synapses, setSynapses] = useState(849204912);
-  const [load, setLoad] = useState(42.8);
-  const [activeNodes, setActiveNodes] = useState(14892);
-  
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSynapses(prev => prev + Math.floor(Math.random() * 4) + 1);
-      setLoad(prev => +(prev + (Math.random() * 0.8 - 0.4)).toFixed(1));
-      setActiveNodes(prev => prev + Math.floor(Math.random() * 5 - 2));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <footer className="relative border-t border-glass-border pt-24 pb-12 px-6 bg-background overflow-hidden">
-      {/* Neural Background overlay image (highly toned down dark watermark style) */}
-      <div
-        className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-[0.035] pointer-events-none"
-        style={{ backgroundImage: "url('/ai_neural_footer.png')" }}
-      />
-      {/* Radial overlay to blend background borders cleanly */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-transparent to-background pointer-events-none" />
-
-      {/* Top glowing edge */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-
-        {/* Futuristic Dashboard / Console Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
-
-          {/* Col 1: Brand & Live System Status (5 cols) */}
-          <div className="lg:col-span-6 space-y-6">
+    <footer className="mt-20 border-t border-slate-200 bg-slate-50 text-slate-600">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+        
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
+          
+          {/* Brand Info (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-110 flex-shrink-0 bg-transparent">
-                <img src="/logo.png" alt="Revoxera Logo" className="w-full h-full object-cover invert dark:invert-0 hue-rotate-180 dark:hue-rotate-0 contrast-125 dark:contrast-100 saturate-150 dark:saturate-100 rounded-xl" />
+              <div className="w-8 h-8 rounded-lg overflow-hidden border border-slate-200 bg-slate-950 flex items-center justify-center shrink-0 shadow-xs">
+                <img src="/logo.png" alt="CaseConverter Logo" className="w-full h-full object-cover" />
               </div>
+              <span className="text-lg font-bold tracking-tight text-slate-900">CaseConverter</span>
             </Link>
-            <p className="text-sm text-foreground/60 leading-relaxed max-w-sm">
-              Precision-crafted developer tools designed to streamline your daily programming, formatting, and design workflows.
+            <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
+              Free, 100% private online text transformation utility. Convert between Title Case, sentence case, camelCase, snake_case, and more with zero server uploads.
             </p>
-
-            {/* Contact cards */}
-            <div className="space-y-2 mt-4">
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/20 mb-2 ml-1">
-                Get in touch
-              </p>
-
-              <a
-                href="mailto:support@revoxera.com"
-                className="group flex items-center gap-3 rounded-2xl border border-glass-border bg-foreground/2 px-3.5 py-3 transition-all duration-500 ease-out hover:translate-y-[-2px] hover:border-primary/20 hover:bg-foreground/4 hover:shadow-[0_8px_30px_var(--primary-glow)]"
-              >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/10 transition-all duration-500 group-hover:bg-primary/20">
-                  <Mail size={13} className="text-primary" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[13px] font-semibold leading-none text-foreground">support@revoxera.com</p>
-                  <p className="mt-1 text-[11px] text-foreground/40 transition-colors group-hover:text-foreground/60">24/7 email support</p>
-                </div>
-              </a>
-
-              
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-700">
+              <ShieldCheck size={14} className="text-emerald-600" />
+              <span>100% Client-Side Processing</span>
             </div>
           </div>
 
-          {/* Col 3: Hivemind Sync (3 cols) */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
-              <Cpu className="w-3.5 h-3.5" />
-              Sync with Hivemind
-            </div>
-            <p className="text-xs text-foreground/50 leading-relaxed">
-              Connect to our weekly neural newsletter for top performing prompt sequences, tokens, and model configurations.
-            </p>
-            <div className="space-y-2">
-              <input
-                type="email"
-                placeholder="neural-address@domain.com"
-                className="w-full text-xs bg-foreground/5 border border-glass-border rounded-xl px-3 py-2.5 text-foreground placeholder-foreground/45 focus:outline-none focus:border-primary/50"
-                suppressHydrationWarning
-              />
-              <button
-                className="w-full py-2.5 bg-primary text-white border border-glass-border rounded-xl text-xs font-bold hover:bg-primary/95 transition-colors duration-200 cursor-pointer"
-                suppressHydrationWarning
-              >
-                Establish Protocol Sync
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Middle Divider */}
-        <div className="h-px bg-glass-border my-10" />
-
-        {/* Link columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+          {/* Navigation Columns */}
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-            <div key={category} className="space-y-4">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
-                <Radio className="w-3 h-3 text-primary/70" />
-                {category}
-              </h4>
-              <ul className="space-y-2.5">
+            <div key={category} className="space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">{category}</h3>
+              <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-xs text-foreground/60 hover:text-primary transition-colors duration-200 font-medium"
+                      className="text-sm text-slate-500 hover:text-slate-900 transition-colors"
+                      {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     >
                       {link.label}
                     </Link>
@@ -180,63 +83,26 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
-          {/* Office Column */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
-              <Radio className="w-3 h-3 text-primary/70" />
-              Office
-            </h4>
-            <div className="flex items-start gap-2.5">
-              {/* <MapPin size={13} className="mt-0.5 shrink-0 text-white/20" />
-              <p className="text-xs leading-relaxed text-white/50">
-                6A Hampstead High St
-                <br />
-                London, NW3 1PR
-              </p> */}
-            </div>
-          </div>
         </div>
 
-        {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-glass-border">
-          <p className="text-xs text-foreground/40" suppressHydrationWarning>
-            © {new Date().getFullYear()} Revoxera. Neural Architecture Sync v4.8.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:justify-end">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              All Systems Operational
-            </span>
-
-            <div className="flex items-center gap-2 text-[11px] font-medium text-foreground/30">
-              <Shield size={11} className="text-primary/30" />
-              Secure payments
-            </div>
-
-            {/* SVG Payment Logos */}
-            {/* <div className="flex items-center gap-3">
-              <PaymentLogo viewBox={logos.visa.viewBox} path={logos.visa.path} width={34} />
-              <PaymentLogo viewBox={logos.mastercard.viewBox} path={logos.mastercard.path} width={24} />
-              <PaymentLogo viewBox={logos.paypal.viewBox} path={logos.paypal.path} width={36} />
-              <PaymentLogo viewBox={logos.amex.viewBox} path={logos.amex.path} width={28} />
-            </div> */}
-
-            {/* Social links */}
-            <div className="flex items-center gap-2">
-              {SOCIAL.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-8 h-8 rounded-lg bg-foreground/5 border border-glass-border flex items-center justify-center text-foreground/45 hover:text-foreground hover:bg-foreground/10 hover:border-primary transition-all duration-350"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} CaseConverter by Revoxera. All rights reserved.</p>
+          
+          {/* Social Links */}
+          <div className="flex items-center gap-3">
+            {SOCIAL.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="w-8 h-8 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-all shadow-xs"
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
         </div>
 

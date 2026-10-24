@@ -239,14 +239,10 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
         />
       </head>
-      <body suppressHydrationWarning>
-        <div className="bg-blob blob-1" />
-        <div className="bg-blob blob-2" />
-        <div className="bg-blob blob-3" />
-
+      <body className="bg-white text-slate-900 min-h-screen flex flex-col font-sans" suppressHydrationWarning>
         <Header />
 
-        <main className="main-content" id="main-content">
+        <main className="main-content flex-grow" id="main-content">
           {children}
         </main>
         <Footer />
