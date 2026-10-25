@@ -272,8 +272,8 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
         </div>
 
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row justify-between items-center px-4 md:px-6 py-2.5 bg-slate-50/80 border-t border-b border-slate-200 gap-3">
-          <div className="flex gap-2 flex-wrap items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-3.5 sm:px-4 md:px-6 py-2.5 bg-slate-50/80 border-t border-b border-slate-200 gap-3">
+          <div className="flex gap-1.5 sm:gap-2 flex-wrap items-center">
             <button suppressHydrationWarning onClick={handleCopy} title="Copy to clipboard" aria-label="Copy to clipboard"
               className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
               {copied ? <Check size={18} className="text-emerald-600" /> : <Copy size={18} />}
@@ -301,10 +301,10 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
           </div>
 
           {/* Stats */}
-          <div className="flex gap-4 md:gap-6 text-xs text-slate-500">
-            <div className="flex items-center gap-1.5"><Hash size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.chars}</strong> Chars</span></div>
-            <div className="flex items-center gap-1.5"><Type size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.words}</strong> Words</span></div>
-            <div className="flex items-center gap-1.5"><FileText size={14} /> <span><strong className="text-slate-900 text-sm font-bold">{stats.lines}</strong> Lines</span></div>
+          <div className="flex gap-3 sm:gap-4 md:gap-6 text-xs text-slate-500 flex-wrap justify-between sm:justify-end w-full sm:w-auto pt-1.5 sm:pt-0 border-t sm:border-t-0 border-slate-200/60">
+            <div className="flex items-center gap-1.5"><Hash size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.chars}</strong> Chars</span></div>
+            <div className="flex items-center gap-1.5"><Type size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.words}</strong> Words</span></div>
+            <div className="flex items-center gap-1.5"><FileText size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.lines}</strong> Lines</span></div>
           </div>
         </div>
 

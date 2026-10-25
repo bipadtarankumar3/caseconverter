@@ -23,25 +23,25 @@ const TOOL_CHIPS = [
 
 export default function CaseConverterHome() {
   return (
-    <div className="container mx-auto px-4 md:px-6 max-w-[1400px]">
+    <div className="w-full max-w-[1400px] mx-auto px-3.5 sm:px-6 lg:px-8">
 
       {/* ── Hero ── */}
-      <section className="text-center mb-8 md:mb-12 max-w-[950px] mx-auto pt-8 md:pt-12">
+      <section className="text-center mb-8 md:mb-12 max-w-[950px] mx-auto pt-6 sm:pt-8 md:pt-12">
         
         {/* Modern Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/90 text-slate-700 text-xs font-bold mb-5 transition-colors">
-          <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200/90 text-slate-700 text-[11px] sm:text-xs font-bold mb-5 transition-colors flex-wrap justify-center">
+          <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
           <span>Zero Server Latency</span>
-          <span className="text-slate-400">&bull;</span>
+          <span className="text-slate-400 hidden xs:inline">&bull;</span>
           <span className="text-emerald-700 font-extrabold">100% Client-Side Privacy</span>
-          <span className="text-slate-400">&bull;</span>
+          <span className="text-slate-400 hidden sm:inline">&bull;</span>
           <Link href="/services" className="text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-0.5 font-bold">
             <span>Explore Services</span>
             <ChevronRight size={12} />
           </Link>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-4 leading-[1.1]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 mb-4 leading-[1.1]">
           Case <span className="text-emerald-600">Converter</span> & Text Engine
         </h1>
         

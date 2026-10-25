@@ -215,7 +215,7 @@ export default function ServicesPage() {
           <Sparkles size={14} className="text-indigo-600" />
           <span>Revoxera Engineering & Text Solutions</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 mb-6 leading-[1.1]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 mb-5 leading-[1.15]">
           Modern Text APIs, Casing Engines & <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 bg-clip-text text-transparent">Enterprise Services</span>
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-8">
@@ -240,17 +240,17 @@ export default function ServicesPage() {
         </div>
 
         {/* Highlight Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-10 border-t border-slate-200">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-8 sm:mt-12 pt-8 sm:pt-10 border-t border-slate-200">
           {[
             { label: 'Avg API Latency', value: '< 0.38ms', sub: 'Global Cloudflare Edge' },
             { label: 'Uptime SLA', value: '99.99%', sub: 'Contract-backed guarantee' },
             { label: 'Data Retention', value: '0 Bytes', sub: '100% GDPR & HIPAA safe' },
             { label: 'Supported Protocols', value: '11+ Formats', sub: 'REST, GraphQL, AST' },
           ].map((stat) => (
-            <div key={stat.label} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-center">
-              <div className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{stat.value}</div>
+            <div key={stat.label} className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight">{stat.value}</div>
               <div className="text-xs font-bold text-slate-700 mt-1">{stat.label}</div>
-              <div className="text-[11px] text-slate-500">{stat.sub}</div>
+              <div className="text-[10px] sm:text-[11px] text-slate-500">{stat.sub}</div>
             </div>
           ))}
         </div>

@@ -316,7 +316,7 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
               </div>
 
               {/* Tabs */}
-              <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+              <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs overflow-x-auto max-w-full scrollbar-none w-full sm:w-auto">
                 {[
                   { id: 'js', label: 'TypeScript / JS' },
                   { id: 'py', label: 'Python' },
@@ -326,7 +326,7 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all shrink-0 ${
                       activeTab === tab.id
                         ? 'bg-emerald-600 text-white shadow-xs'
                         : 'text-slate-400 hover:text-slate-200'
@@ -340,13 +340,13 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
 
             {/* Code Block */}
             <div className="relative">
-              <pre className="font-mono text-xs text-emerald-300/90 leading-relaxed overflow-x-auto p-4 rounded-2xl bg-slate-900/90 border border-slate-800/80 scrollbar-premium">
+              <pre className="font-mono text-xs text-emerald-300/90 leading-relaxed overflow-x-auto p-4 pt-12 sm:pt-4 rounded-2xl bg-slate-900/90 border border-slate-800/80 scrollbar-premium">
                 <code>{codeSnippets[activeTab]}</code>
               </pre>
 
               <button
                 onClick={() => handleCopy('code', codeSnippets[activeTab])}
-                className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs"
+                className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 px-2.5 py-1 rounded-lg bg-slate-800/95 hover:bg-slate-700 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs"
               >
                 {copiedId === 'code' ? (
                   <>
