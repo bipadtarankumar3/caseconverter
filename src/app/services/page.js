@@ -6,7 +6,7 @@ import {
   Zap, Cpu, ShieldCheck, FileCode2, Globe2, ArrowRight,
   CheckCircle2, Terminal, Code2, Server, Sliders, Sparkles,
   HelpCircle, MessageSquare, Send, Check, Layers, Workflow,
-  Lock, Clock, Building2, Database, Rocket
+  Lock, Clock, Building2, Database, Rocket, Palette, ExternalLink
 } from 'lucide-react';
 
 export default function ServicesPage() {
@@ -199,6 +199,45 @@ export default function ServicesPage() {
     },
   ];
 
+  const ECOSYSTEM_SERVICES = [
+    {
+      title: 'HTML Color Codes & Picker',
+      url: 'https://colorcode.revoxera.com/',
+      desc: 'HEX, RGB, HSL & OKLCH color generator with live contrast tools, palette builder, and visualizer.',
+      icon: <Palette className="w-5 h-5 text-emerald-600" />,
+      badge: 'Color Studio',
+      badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      gradient: 'from-emerald-500 to-teal-600',
+    },
+    {
+      title: 'SQL Formatter & Beautifier',
+      url: 'https://sqlformatter.revoxera.com/',
+      desc: 'Multi-dialect SQL query formatter for PostgreSQL, BigQuery, Snowflake, MySQL, and SQLite.',
+      icon: <Database className="w-5 h-5 text-blue-600" />,
+      badge: 'Database Tool',
+      badgeColor: 'bg-blue-50 text-blue-800 border-blue-200',
+      gradient: 'from-blue-500 to-indigo-600',
+    },
+    {
+      title: 'JSON Formatter & Mapper',
+      url: 'https://json-formatter-mapper.revoxera.com/',
+      desc: 'Interactive JSON schema mapper, validator, AST tree visualizer, and data transformation engine.',
+      icon: <FileCode2 className="w-5 h-5 text-purple-600" />,
+      badge: 'Data Pipeline',
+      badgeColor: 'bg-purple-50 text-purple-800 border-purple-200',
+      gradient: 'from-purple-500 to-pink-600',
+    },
+    {
+      title: 'AI Prompt Generator',
+      url: 'https://ai-prompt.revoxera.com/',
+      desc: 'Structured system prompt designer, meta-prompt optimizer, and token efficiency engine for LLMs.',
+      icon: <Rocket className="w-5 h-5 text-amber-600" />,
+      badge: 'AI Engineering',
+      badgeColor: 'bg-amber-50 text-amber-800 border-amber-200',
+      gradient: 'from-amber-500 to-orange-600',
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 md:px-6 max-w-[1400px] py-10 md:py-16">
       
@@ -384,6 +423,57 @@ export default function ServicesPage() {
                 <ArrowRight size={13} />
               </a>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Revoxera Ecosystem Platforms & Developer Sites ── */}
+      <section className="max-w-6xl mx-auto mb-20 md:mb-28">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs font-bold mb-3">
+            <Sparkles size={13} className="text-indigo-600" />
+            <span>Revoxera Production Platforms</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-3">
+            Ecosystem Developer Tools & Web Services
+          </h2>
+          <p className="text-slate-600 text-xs md:text-sm max-w-xl mx-auto">
+            Explore our specialized developer applications built for performance, privacy, and precision formatting.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {ECOSYSTEM_SERVICES.map((eco) => (
+            <a
+              key={eco.title}
+              href={eco.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white border border-slate-200 hover:border-slate-300 rounded-3xl p-5 md:p-6 flex flex-col justify-between shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                    {eco.icon}
+                  </div>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${eco.badgeColor}`}>
+                    {eco.badge}
+                  </span>
+                </div>
+
+                <h3 className="font-bold text-slate-900 text-sm mb-1.5 group-hover:text-indigo-600 transition-colors">
+                  {eco.title}
+                </h3>
+                <p className="text-slate-500 text-xs leading-relaxed mb-4">
+                  {eco.desc}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
+                <span>Launch platform</span>
+                <ExternalLink size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </a>
           ))}
         </div>
       </section>

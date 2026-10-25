@@ -37,10 +37,10 @@ const FOOTER_SECTIONS = {
     { label: 'Keyboard Shortcuts Guide', href: '/#faq' },
   ],
   'Revoxera Ecosystem': [
-    { label: 'AI Prompt Generator', href: 'https://aiprompt.revoxera.com' },
-    { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com' },
-    { label: 'JSON Formatter & Validator', href: 'https://jsonformatter.revoxera.com' },
-    { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com' },
+    { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com/' },
+    { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com/' },
+    { label: 'JSON Formatter & Mapper', href: 'https://json-formatter-mapper.revoxera.com/' },
+    { label: 'AI Prompt Generator', href: 'https://ai-prompt.revoxera.com/' },
   ],
 };
 

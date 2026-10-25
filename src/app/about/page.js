@@ -53,10 +53,10 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { label: 'Case Converter', href: 'https://caseconverter.revoxera.com', current: true },
-              { label: 'JSON Formatter', href: 'https://jsonformatter.revoxera.com' },
-              { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com' },
-              { label: 'Color Code Tool', href: 'https://colorcode.revoxera.com' },
-              { label: 'AI Prompt Generator', href: 'https://aiprompt.revoxera.com' },
+              { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com/' },
+              { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com/' },
+              { label: 'JSON Formatter & Mapper', href: 'https://json-formatter-mapper.revoxera.com/' },
+              { label: 'AI Prompt Generator', href: 'https://ai-prompt.revoxera.com/' },
             ].map(({ label, href, current }) => (
               <a key={label} href={href} target={current ? undefined : '_blank'} rel="noopener noreferrer"
                 className={`flex items-center gap-3 p-3 rounded-xl border transition-all text-xs font-semibold ${current ? 'border-emerald-500 bg-emerald-50 text-emerald-800' : 'border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-300 text-slate-700'}`}>
