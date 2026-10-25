@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import {
   CodeXml, Menu, X, Home, Sparkles, BookOpen, Layers,
   ChevronDown, ArrowRight, Zap, Shield, Cpu, Terminal,
-  ExternalLink, Check, Briefcase, FileCode2
+  ExternalLink, Check, Briefcase, FileCode2, Palette, Database
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -77,25 +77,36 @@ export const TOOLS_NAV = [
 
 export const SERVICES_NAV = [
   {
-    title: 'Text Transformation API',
-    desc: 'High-throughput edge API for batch casing, slugification & sanitization.',
-    href: '/services#api',
-    icon: <Zap className="w-4 h-4 text-emerald-600" />,
-    tag: 'Edge Ready',
+    title: 'HTML Color Codes & Picker',
+    desc: 'HEX, RGB, HSL & OKLCH color tools, contrast checker & palette studio.',
+    href: 'https://colorcode.revoxera.com/',
+    icon: <Palette className="w-4 h-4 text-emerald-600" />,
+    tag: 'Color Studio',
+    external: true,
   },
   {
-    title: 'AST & Codebase Migration',
-    desc: 'Automated refactoring of legacy databases & code identifiers.',
-    href: '/services#migration',
-    icon: <Cpu className="w-4 h-4 text-indigo-600" />,
-    tag: 'Enterprise',
+    title: 'SQL Formatter & Beautifier',
+    desc: 'Multi-dialect SQL query formatter for PostgreSQL, BigQuery, Snowflake & MySQL.',
+    href: 'https://sqlformatter.revoxera.com/',
+    icon: <Database className="w-4 h-4 text-blue-600" />,
+    tag: 'Database Tool',
+    external: true,
   },
   {
-    title: 'Custom Typography Engines',
-    desc: 'Rule-based headline casing & editorial compliance software.',
-    href: '/services#typography',
+    title: 'JSON Formatter & Mapper',
+    desc: 'Interactive schema mapping, tree visualizer, validator & minifier.',
+    href: 'https://json-formatter-mapper.revoxera.com/',
     icon: <FileCode2 className="w-4 h-4 text-purple-600" />,
-    tag: 'Custom',
+    tag: 'Data Pipeline',
+    external: true,
+  },
+  {
+    title: 'AI Prompt Generator',
+    desc: 'Structured system prompt designer & token optimizer for Claude, GPT & Gemini.',
+    href: 'https://ai-prompt.revoxera.com/',
+    icon: <Rocket className="w-4 h-4 text-amber-600" />,
+    tag: 'AI Engineering',
+    external: true,
   },
 ];
 
