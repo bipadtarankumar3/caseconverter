@@ -38,7 +38,7 @@ const FOOTER_SECTIONS = {
   ],
   'Revoxera Ecosystem': [
     { label: 'AI Prompt Generator', href: 'https://aiprompt.revoxera.com' },
-    { label: 'SQL Formatter Pro', href: 'https://sqlformatter.revoxera.com' },
+    { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com' },
     { label: 'JSON Formatter & Validator', href: 'https://jsonformatter.revoxera.com' },
     { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com' },
   ],
@@ -64,7 +64,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-20 border-t border-slate-200 bg-slate-50/90 text-slate-600" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-12 md:py-16">
         
         {/* Top Newsletter / Status Banner */}
         <div className="mb-12 p-6 md:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-6">

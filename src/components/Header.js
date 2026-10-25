@@ -122,7 +122,7 @@ export default function Header() {
       }`}
       role="banner"
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-full w-full max-w-[1400px]">
+      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 flex justify-between items-center h-full">
 
         {/* ── Brand Logo ── */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -139,9 +139,6 @@ export default function Header() {
             <div className="flex items-center gap-1.5">
               <span className="text-xl font-black tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">
                 Case<span className="text-emerald-600">Converter</span>
-              </span>
-              <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-200/60 tracking-wider">
-                PRO
               </span>
             </div>
             <span className="text-[11px] font-medium text-slate-500 tracking-tight -mt-0.5 hidden sm:block">

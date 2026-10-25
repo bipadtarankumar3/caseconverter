@@ -160,7 +160,7 @@ export default function ServicesPage() {
       featured: false,
     },
     {
-      name: 'Pro Developer',
+      name: 'Developer API',
       badge: 'Most Popular',
       badgeColor: 'bg-emerald-100 text-emerald-800 border border-emerald-300',
       price: '$29',
@@ -174,7 +174,7 @@ export default function ServicesPage() {
         'SDK access (TypeScript, Python, Go)',
         'Standard email support (24hr turnaround)',
       ],
-      cta: 'Start Pro Trial',
+      cta: 'Get API Access',
       href: '#quote',
       featured: true,
     },
