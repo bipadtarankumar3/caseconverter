@@ -368,8 +368,8 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
               <ShieldCheck size={14} className="text-emerald-400" />
               AST & Tokenizer compliant &bull; 0 runtime vulnerabilities
             </span>
-            <Link href="/services#api" className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
-              <span>View API Docs</span>
+            <Link href="/services" className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
+              <span>Ecosystem Tools</span>
               <ArrowRight size={12} />
             </Link>
           </div>
@@ -446,9 +446,9 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
           </div>
 
           <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-medium">Have a large migration?</span>
-            <Link href="/services#migration" className="font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
-              <span>Explore Migration Service</span>
+            <span className="text-slate-500 font-medium">Looking for more developer tools?</span>
+            <Link href="/services" className="font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+              <span>Explore Ecosystem Services</span>
               <ArrowRight size={12} />
             </Link>
           </div>

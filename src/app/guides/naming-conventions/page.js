@@ -190,10 +190,10 @@ export default function NamingConventionsGuide() {
                   <ArrowRight size={13} />
                 </Link>
                 <Link
-                  href="/services#migration"
+                  href="/services"
                   className="text-[11px] font-semibold text-indigo-600 hover:text-indigo-700 hidden sm:block"
                 >
-                  Need AST codebase migration? →
+                  Explore Revoxera Services →
                 </Link>
               </div>
             </section>

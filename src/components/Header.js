@@ -277,7 +277,7 @@ export default function Header() {
               </div>
               <span>Services</span>
               <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/50">
-                API & Agency
+                Ecosystem
               </span>
               <ChevronDown
                 size={14}
@@ -292,7 +292,7 @@ export default function Header() {
                 <div className="bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-900/10 p-3.5">
                   <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                      Developer & Business Suite
+                      Revoxera Ecosystem Platforms
                     </span>
                     <Link
                       href="/services"

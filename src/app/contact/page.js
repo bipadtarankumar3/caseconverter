@@ -47,15 +47,15 @@ export default function ContactPage() {
           <p className="text-slate-400 text-[11px] mt-0.5">Open source repository</p>
         </a>
 
-        <Link href="/services#quote"
+        <Link href="/services"
           className="group p-6 bg-indigo-50/50 border border-indigo-200/80 rounded-2xl hover:border-indigo-500 hover:shadow-xs transition-all">
           <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4 text-lg">
             ⚡
           </div>
-          <h2 className="text-base font-bold text-slate-900 mb-1">API & Enterprise</h2>
-          <p className="text-slate-500 text-xs mb-3">Custom migration & API quote.</p>
+          <h2 className="text-base font-bold text-slate-900 mb-1">Ecosystem Services</h2>
+          <p className="text-slate-500 text-xs mb-3">Revoxera developer platforms suite.</p>
           <p className="text-indigo-600 font-bold text-sm">Explore Services →</p>
-          <p className="text-slate-400 text-[11px] mt-0.5">Dedicated SLA & contracts</p>
+          <p className="text-slate-400 text-[11px] mt-0.5">Color, SQL, JSON & AI tools</p>
         </Link>
       </div>
 

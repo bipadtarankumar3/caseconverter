@@ -141,50 +141,48 @@ export default function CaseConverterHome() {
         </div>
       </section>
 
-      {/* ── Services Spotlight Banner ── */}
+      {/* ── Ecosystem Developer Suite Spotlight Banner ── */}
       <section className="max-w-6xl mx-auto mb-16 md:mb-20 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white shadow-xl relative overflow-hidden">
         <div className="absolute right-0 top-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold mb-4">
-              <Cpu size={14} />
-              <span>Revoxera Developer Suite</span>
+              <Sparkles size={14} />
+              <span>Revoxera Ecosystem Platforms</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white mb-3">
-              Need High-Volume Edge APIs or Automated Codebase Migration?
+              Explore the Full Revoxera Developer Suite
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
-              Our engineering team builds edge-deployed text processing microservices, custom headline engines for media publications, and automated AST identifier migrations for enterprise codebases.
+              Discover our ecosystem of fast, free, client-side tools designed for web development, database query formatting, schema visualization, and AI engineering.
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-xs text-slate-300">
-              <span className="flex items-center gap-1.5">
-                <Check size={14} className="text-emerald-400" />
-                Sub-millisecond REST/GraphQL API
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check size={14} className="text-emerald-400" />
-                AST-based Zero Regression Refactoring
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Check size={14} className="text-emerald-400" />
-                Enterprise SLA & Custom DPAs
-              </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+              <a href="https://colorcode.revoxera.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <Check size={14} className="text-emerald-400 shrink-0" />
+                <span>HTML Color Codes & Picker</span>
+              </a>
+              <a href="https://sqlformatter.revoxera.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <Check size={14} className="text-blue-400 shrink-0" />
+                <span>SQL Formatter & Beautifier</span>
+              </a>
+              <a href="https://json-formatter-mapper.revoxera.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <Check size={14} className="text-purple-400 shrink-0" />
+                <span>JSON Formatter & Mapper</span>
+              </a>
+              <a href="https://ai-prompt.revoxera.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                <Check size={14} className="text-amber-400 shrink-0" />
+                <span>AI Prompt Generator</span>
+              </a>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
             <Link
               href="/services"
-              className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm text-center shadow-md transition-all flex items-center justify-center gap-2"
+              className="px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm text-center shadow-md transition-all flex items-center justify-center gap-2"
             >
-              <span>Explore All Services</span>
+              <span>Explore Ecosystem Services</span>
               <ArrowRight size={14} />
-            </Link>
-            <Link
-              href="/services#quote"
-              className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm text-center border border-white/20 transition-all flex items-center justify-center gap-2"
-            >
-              <span>Request API Key</span>
             </Link>
           </div>
         </div>

@@ -20,14 +20,12 @@ const FOOTER_SECTIONS = {
     { label: 'kebab-case Generator', href: '/tools/kebab-case-generator' },
     { label: 'View All 11 Tools →', href: '/tools' },
   ],
-  'Developer Services': [
-    { label: 'High-Speed Text API', href: '/services#api', badge: 'Edge' },
-    { label: 'AST Codebase Migration', href: '/services#migration' },
-    { label: 'Custom Typography Engines', href: '/services#typography' },
-    { label: 'White-Label Portals', href: '/services#portals' },
-    { label: 'Unicode & Localization', href: '/services#unicode' },
-    { label: 'Pricing & Tiers', href: '/services#pricing' },
-    { label: 'Request Custom Quote', href: '/services#quote' },
+  'Ecosystem Services': [
+    { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com/' },
+    { label: 'SQL Formatter & Beautifier', href: 'https://sqlformatter.revoxera.com/' },
+    { label: 'JSON Formatter & Mapper', href: 'https://json-formatter-mapper.revoxera.com/' },
+    { label: 'AI Prompt Generator', href: 'https://ai-prompt.revoxera.com/' },
+    { label: 'All Ecosystem Platforms →', href: '/services' },
   ],
   'Guides & Resources': [
     { label: 'APA Title Case Rules', href: '/guides/apa-title-case' },
@@ -36,11 +34,12 @@ const FOOTER_SECTIONS = {
     { label: 'JavaScript Case Snippets', href: '/#techniques' },
     { label: 'Keyboard Shortcuts Guide', href: '/#faq' },
   ],
-  'Revoxera Ecosystem': [
-    { label: 'HTML Color Codes & Picker', href: 'https://colorcode.revoxera.com/' },
-    { label: 'SQL Formatter', href: 'https://sqlformatter.revoxera.com/' },
-    { label: 'JSON Formatter & Mapper', href: 'https://json-formatter-mapper.revoxera.com/' },
-    { label: 'AI Prompt Generator', href: 'https://ai-prompt.revoxera.com/' },
+  'Company': [
+    { label: 'About CaseConverter', href: '/about' },
+    { label: 'Services & Platforms', href: '/services' },
+    { label: 'Contact Support', href: '/contact' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
   ],
 };
 
@@ -136,7 +135,7 @@ export default function Footer() {
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-800 w-fit">
                 <Zap size={14} className="text-indigo-600 shrink-0" />
-                <span>Edge REST & GraphQL API Available</span>
+                <span>Revoxera Developer Suite</span>
               </div>
             </div>
           </div>
