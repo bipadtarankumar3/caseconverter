@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import {
   CodeXml, Menu, X, Home, Sparkles, BookOpen, Layers,
   ChevronDown, ArrowRight, Zap, Shield, Cpu, Terminal,
-  ExternalLink, Check, Briefcase, FileCode2, Palette, Database
+  ExternalLink, Check, Briefcase, FileCode2, Palette, Database, Rocket
 } from 'lucide-react';
 import Link from 'next/link';
 
