@@ -2,142 +2,157 @@ import Link from 'next/link';
 import CaseConverterTool from '../../../components/CaseConverterTool';
 
 export const metadata = {
-  title: 'APA Title Case Rules — Complete Guide with Examples & Free Tool',
-  description: 'Learn APA 7th edition title case rules with detailed examples. Use our free tool to auto-convert headings to APA style. Updated for 2025 guidelines.',
-  keywords: 'apa title case, apa title capitalization, apa heading format, apa style title, apa 7th edition capitalization',
+  title: 'APA Title Case Rules & Free Converter — 7th Edition Guide',
+  description: 'Complete guide to APA Title Case (7th edition). Learn which words to capitalize, which to lowercase, with real examples and our free APA title case converter tool.',
   alternates: { canonical: 'https://caseconverter.revoxera.com/guides/apa-title-case' },
 };
 
-const articleSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: 'APA Title Case Rules — Complete Guide with Examples',
-  description: 'A complete guide to APA 7th edition title case rules with examples, exceptions, and a free online converter.',
-  author: { '@type': 'Organization', name: 'CaseConverter' },
-  publisher: { '@type': 'Organization', name: 'CaseConverter', url: 'https://caseconverter.revoxera.com' },
-  mainEntityOfPage: 'https://caseconverter.revoxera.com/guides/apa-title-case',
-};
-
-const breadcrumb = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://caseconverter.revoxera.com' },
-    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://caseconverter.revoxera.com/guides' },
-    { '@type': 'ListItem', position: 3, name: 'APA Title Case', item: 'https://caseconverter.revoxera.com/guides/apa-title-case' },
-  ],
-};
-
-const ALWAYS_CAP = ['Capitalize', 'Nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Pronouns', 'Subordinating conjunctions (After, Because, Since, When)', 'Words of 4+ letters'];
-const USUALLY_LOWER = ['Articles: a, an, the', 'Coordinating conjunctions: and, but, for, nor, or, so, yet', 'Short prepositions: at, by, in, of, on, to, up'];
-
-const EXAMPLES = [
-  { title: 'Journal Article Title', input: 'the effects of social media on mental health in teenagers', output: 'The Effects of Social Media on Mental Health in Teenagers' },
-  { title: 'Book Chapter', input: 'a guide to cognitive behavioral therapy for anxiety and depression', output: 'A Guide to Cognitive Behavioral Therapy for Anxiety and Depression' },
-  { title: 'Research Paper', input: 'understanding machine learning algorithms: from theory to practice', output: 'Understanding Machine Learning Algorithms: From Theory to Practice' },
-  { title: 'Heading with Subtitle', input: 'art in the digital age: an analysis of online culture and aesthetics', output: 'Art in the Digital Age: An Analysis of Online Culture and Aesthetics' },
+const ALWAYS_CAP = [
+  'First word of the title and subtitle',
+  'First word after a colon, em dash, or end punctuation',
+  'Major words: nouns, verbs, adjectives, adverbs, pronouns',
+  'Words of four or more letters (e.g., "With", "Between", "From")',
+  'Both words in a hyphenated compound (e.g., "Self-Report", "Non-Significant")',
 ];
 
-export default function APATitleCaseGuide() {
+const USUALLY_LOWER = [
+  'Short conjunctions (3 or fewer letters): and, as, but, for, if, nor, or, so, yet',
+  'Short prepositions (3 or fewer letters): at, by, for, in, of, off, on, out, per, to, up, via',
+  'Articles: a, an, the',
+];
+
+const EXAMPLES = [
+  {
+    title: 'Short prepositions lowercase, 4+ letters capitalized',
+    input: 'the role of artificial intelligence in modern healthcare systems',
+    output: 'The Role of Artificial Intelligence in Modern Healthcare Systems',
+  },
+  {
+    title: 'Subtitle after a colon capitalized',
+    input: 'digital transformation: a comprehensive study on enterprise agility',
+    output: 'Digital Transformation: A Comprehensive Study on Enterprise Agility',
+  },
+  {
+    title: 'Hyphenated compounds with both words capitalized',
+    input: 'self-reported symptoms and peer-reviewed clinical outcomes',
+    output: 'Self-Reported Symptoms and Peer-Reviewed Clinical Outcomes',
+  },
+];
+
+export default function ApaTitleCaseGuide() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+    <div className="container mx-auto px-4 md:px-6 max-w-[900px] py-10 md:py-16">
+      
+      {/* Breadcrumb */}
+      <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-500">
+        <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
+        <span>/</span>
+        <Link href="/guides/naming-conventions" className="hover:text-slate-900 transition-colors">Guides</Link>
+        <span>/</span>
+        <span className="text-slate-900 font-bold">APA Title Case</span>
+      </nav>
 
-      <div className="container mx-auto px-4 md:px-6 max-w-[1000px] py-10 md:py-16">
-        <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-muted">
-          <Link href="/" className="hover:text-white transition-colors">Home</Link><span>/</span>
-          <span className="text-muted">Guides</span><span>/</span>
-          <span className="text-white">APA Title Case</span>
-        </nav>
+      <header className="mb-12">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold mb-4">
+          APA 7th Edition Style Guide
+        </div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-4">
+          APA Title Case: Complete Rules & Examples
+        </h1>
+        <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+          APA Style 7th edition specifies strict title case rules for academic headings, figure titles, and article references. This guide covers every rule with clear examples — and lets you convert text instantly with our free tool.
+        </p>
+      </header>
 
-        <header className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6">APA 7th Edition · Updated 2025</div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-b from-white to-muted bg-clip-text text-transparent">
-            APA Title Case: Complete Rules & Examples
-          </h1>
-          <p className="text-muted text-xl leading-relaxed">
-            APA Style 7th edition has specific title case rules for headings, figure titles, and references. This guide covers every rule with examples — and lets you convert instantly with our free tool.
-          </p>
-        </header>
-
-        {/* Quick Rules */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-6">APA Title Case Rules at a Glance</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 bg-green-500/5 border border-green-500/20 rounded-[24px]">
-              <h3 className="font-bold text-green-400 mb-4 flex items-center gap-2">✅ Always Capitalize</h3>
-              <ul className="space-y-2">
-                {ALWAYS_CAP.map(r => <li key={r} className="text-sm text-muted flex items-start gap-2"><span className="text-green-400 shrink-0">·</span>{r}</li>)}
-                <li className="text-sm text-muted flex items-start gap-2"><span className="text-green-400 shrink-0">·</span>First and last word of the title/subtitle</li>
-                <li className="text-sm text-muted flex items-start gap-2"><span className="text-green-400 shrink-0">·</span>First word after a colon or em dash</li>
-              </ul>
-            </div>
-            <div className="p-6 bg-red-500/5 border border-red-500/20 rounded-[24px]">
-              <h3 className="font-bold text-red-400 mb-4 flex items-center gap-2">🔻 Usually Lowercase</h3>
-              <ul className="space-y-2">
-                {USUALLY_LOWER.map(r => <li key={r} className="text-sm text-muted flex items-start gap-2"><span className="text-red-400 shrink-0">·</span>{r}</li>)}
-                <li className="text-sm text-muted flex items-start gap-2"><span className="text-red-400 shrink-0">·</span>Infinitive marker: to (e.g., "to learn")</li>
-              </ul>
-            </div>
+      {/* Quick Rules */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">APA Title Case Rules at a Glance</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="p-6 bg-emerald-50/50 border border-emerald-200 rounded-3xl">
+            <h3 className="font-bold text-emerald-900 mb-4 flex items-center gap-2">✅ Always Capitalize</h3>
+            <ul className="space-y-2 text-xs md:text-sm text-slate-700">
+              {ALWAYS_CAP.map(r => (
+                <li key={r} className="flex items-start gap-2">
+                  <span className="text-emerald-600 font-bold shrink-0">&bull;</span>
+                  <span>{r}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
+          <div className="p-6 bg-rose-50/50 border border-rose-200 rounded-3xl">
+            <h3 className="font-bold text-rose-900 mb-4 flex items-center gap-2">🔻 Usually Lowercase</h3>
+            <ul className="space-y-2 text-xs md:text-sm text-slate-700">
+              {USUALLY_LOWER.map(r => (
+                <li key={r} className="flex items-start gap-2">
+                  <span className="text-rose-600 font-bold shrink-0">&bull;</span>
+                  <span>{r}</span>
+                </li>
+              ))}
+              <li className="flex items-start gap-2">
+                <span className="text-rose-600 font-bold shrink-0">&bull;</span>
+                <span>Infinitive marker: to (e.g., &ldquo;to Learn&rdquo; vs &ldquo;to learn&rdquo;)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        {/* Examples */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-6">APA Title Case Examples</h2>
-          <div className="space-y-4">
-            {EXAMPLES.map(({ title, input, output }) => (
-              <div key={title} className="border border-white/10 rounded-2xl overflow-hidden">
-                <div className="px-5 py-3 bg-white/[0.01] border-b border-white/10">
-                  <p className="text-xs font-bold text-muted uppercase tracking-wider">{title}</p>
+      {/* Examples */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-slate-900 mb-6">APA Title Case Examples</h2>
+        <div className="space-y-4">
+          {EXAMPLES.map(({ title, input, output }) => (
+            <div key={title} className="border border-slate-200 bg-white rounded-2xl overflow-hidden shadow-xs">
+              <div className="px-5 py-3 bg-slate-50 border-b border-slate-200">
+                <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">{title}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="p-5 border-b md:border-b-0 md:border-r border-slate-100">
+                  <p className="text-xs text-slate-400 mb-1 font-bold">Original</p>
+                  <p className="text-slate-700 font-mono text-xs md:text-sm">{input}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                  <div className="p-5 bg-white/[0.02]"><p className="text-xs text-muted mb-2 font-bold">Original</p><p className="text-white/70 font-mono text-sm">{input}</p></div>
-                  <div className="p-5 bg-primary/5 border-l border-white/10"><p className="text-xs text-primary mb-2 font-bold">APA Title Case</p><p className="text-white font-mono text-sm font-semibold">{output}</p></div>
+                <div className="p-5 bg-emerald-50/30">
+                  <p className="text-xs text-emerald-700 mb-1 font-bold">APA Title Case</p>
+                  <p className="text-slate-900 font-mono text-xs md:text-sm font-bold">{output}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* APA vs Sentence Case */}
-        <section className="mb-12 p-8 bg-white/[0.02] border border-white/10 rounded-[28px]">
-          <h2 className="text-2xl font-black text-white mb-4">APA Title Case vs Sentence Case</h2>
-          <p className="text-muted leading-relaxed mb-6">APA uses <strong className="text-white">different capitalization rules depending on context</strong>:</p>
-          <div className="space-y-4">
-            <div className="p-4 bg-white/[0.03] rounded-xl">
-              <p className="text-primary font-bold text-sm mb-1">Title Case — Use for:</p>
-              <p className="text-muted text-sm">Book titles, journal article titles, report titles (in the body of your paper). Also used for titles of works in your reference list.</p>
             </div>
-            <div className="p-4 bg-white/[0.03] rounded-xl">
-              <p className="text-amber-400 font-bold text-sm mb-1">Sentence Case — Use for:</p>
-              <p className="text-muted text-sm">Article and chapter titles in your reference list. Only the first word, proper nouns, and the first word after a colon are capitalized.</p>
-            </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* Free Tool CTA */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-4">Convert to APA Title Case — Free Tool</h2>
-          <p className="text-muted mb-6">Paste your heading below and click &ldquo;Title Case&rdquo; to apply proper APA-style capitalization instantly.</p>
-          <CaseConverterTool initialMode="title" />
-        </section>
-
-        {/* Related */}
-        <section>
-          <h2 className="text-2xl font-black text-white mb-6">Related Guides & Tools</h2>
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: 'Title Case Converter Tool', href: '/tools/title-case' },
-              { label: 'Chicago Style Title Case', href: '/guides/chicago-title-case' },
-              { label: 'Sentence Case vs Title Case', href: '/guides/sentence-case-vs-title-case' },
-              { label: 'Naming Conventions Guide', href: '/guides/naming-conventions' },
-            ].map(({ label, href }) => (
-              <Link key={href} href={href} className="px-4 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-muted hover:text-white hover:border-primary transition-all">{label} →</Link>
-            ))}
+      {/* APA vs Sentence Case */}
+      <section className="mb-12 p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
+        <h2 className="text-2xl font-bold text-slate-900 mb-3">APA Title Case vs Sentence Case</h2>
+        <p className="text-slate-600 text-sm leading-relaxed mb-6">APA utilizes distinct capitalization depending on paper sections:</p>
+        <div className="space-y-3">
+          <div className="p-4 bg-slate-50 border border-slate-200/80 rounded-2xl">
+            <p className="text-emerald-700 font-bold text-sm mb-1">Title Case — Use for:</p>
+            <p className="text-slate-600 text-xs md:text-sm">Paper title, headings (Levels 1–3), table titles, and figure titles. Also used when citing published books or articles inside body paragraphs.</p>
           </div>
-        </section>
-      </div>
-    </>
+          <div className="p-4 bg-slate-50 border border-slate-200/80 rounded-2xl">
+            <p className="text-amber-700 font-bold text-sm mb-1">Sentence Case — Use for:</p>
+            <p className="text-slate-600 text-xs md:text-sm">Article and chapter titles inside your reference list at the end of the document. Only the first word, proper nouns, and the word following a colon are capitalized.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Free Tool CTA */}
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-slate-900 mb-2">Convert to Title Case — Live Tool</h2>
+        <p className="text-slate-600 text-sm mb-6">Paste your heading below to apply style-compliant capitalization instantly.</p>
+        <CaseConverterTool initialMode="title" />
+      </section>
+
+      {/* Related */}
+      <section className="p-6 md:p-8 bg-slate-50 border border-slate-200 rounded-3xl">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Related Guides & Tools</h2>
+        <div className="flex flex-wrap gap-2.5">
+          <Link href="/tools/title-case" className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs">Title Case Tool →</Link>
+          <Link href="/guides/naming-conventions" className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs">Naming Conventions Guide →</Link>
+          <Link href="/services" className="px-4 py-2 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-700 hover:bg-indigo-100 transition-all">Typography API & Enterprise Suite →</Link>
+        </div>
+      </section>
+    </div>
   );
 }

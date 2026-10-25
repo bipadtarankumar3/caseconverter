@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import CaseConverterTool from '../../../components/CaseConverterTool';
+import { ArrowRight, Code2, BookOpen, Layers } from 'lucide-react';
 
 export const metadata = {
   title: 'Code Naming Conventions — camelCase vs PascalCase vs snake_case vs kebab-case',
@@ -30,8 +31,8 @@ const CONVENTIONS = [
   {
     name: 'camelCase',
     example: 'userProfileName',
-    color: 'blue',
-    colorClass: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+    toolSlug: 'camel-case-generator',
+    colorClass: 'text-blue-700 bg-blue-50 border-blue-200',
     desc: 'Starts with lowercase. Each subsequent word starts with uppercase. No separators.',
     when: [
       { lang: 'JavaScript / TypeScript', use: 'Variables, functions, object properties', ex: 'getUserName(), firstName' },
@@ -44,8 +45,8 @@ const CONVENTIONS = [
   {
     name: 'PascalCase',
     example: 'UserProfileName',
-    color: 'teal',
-    colorClass: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
+    toolSlug: 'pascal-case-generator',
+    colorClass: 'text-teal-700 bg-teal-50 border-teal-200',
     desc: 'Same as camelCase but the very first letter is also uppercase. Also called UpperCamelCase.',
     when: [
       { lang: 'C#', use: 'Classes, methods, properties, namespaces', ex: 'UserController, GetById()' },
@@ -58,9 +59,9 @@ const CONVENTIONS = [
   {
     name: 'snake_case',
     example: 'user_profile_name',
-    color: 'red',
-    colorClass: 'text-red-400 bg-red-500/10 border-red-500/20',
-    desc: 'All lowercase, words separated by underscores. Reads like a snake stretched across the text.',
+    toolSlug: 'snake-case-generator',
+    colorClass: 'text-rose-700 bg-rose-50 border-rose-200',
+    desc: 'All lowercase, words separated by underscores. Standard for Python PEP 8 and relational database schemas.',
     when: [
       { lang: 'Python', use: 'Variables, functions, modules (PEP 8)', ex: 'get_user_name(), total_price' },
       { lang: 'Ruby / Rails', use: 'Methods and local variables', ex: 'find_by_id(), user_count' },
@@ -72,8 +73,8 @@ const CONVENTIONS = [
   {
     name: 'kebab-case',
     example: 'user-profile-name',
-    color: 'purple',
-    colorClass: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    toolSlug: 'kebab-case-generator',
+    colorClass: 'text-purple-700 bg-purple-50 border-purple-200',
     desc: 'All lowercase, words separated by hyphens. Also called dash-case or hyphen-case.',
     when: [
       { lang: 'CSS', use: 'Class names and custom properties', ex: '.primary-button, --text-color' },
@@ -92,51 +93,56 @@ export default function NamingConventionsGuide() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       <div className="container mx-auto px-4 md:px-6 max-w-[1100px] py-10 md:py-16">
-        <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm text-muted">
-          <Link href="/" className="hover:text-white transition-colors">Home</Link><span>/</span>
-          <span className="text-muted">Guides</span><span>/</span>
-          <span className="text-white">Naming Conventions</span>
+        
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
+          <span>/</span>
+          <span className="text-slate-400">Guides</span>
+          <span>/</span>
+          <span className="text-slate-900 font-bold">Naming Conventions</span>
         </nav>
 
         <header className="mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold mb-6">Developer Guide · All Languages</div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-b from-white to-muted bg-clip-text text-transparent">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold mb-4">
+            Developer Standards &bull; Multi-Language Guide
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-4">
             camelCase vs PascalCase vs snake_case vs kebab-case
           </h1>
-          <p className="text-muted text-xl leading-relaxed">
-            Every programming language has conventions for naming variables, functions, and files.
-            This guide explains the four major naming styles, when to use each, and provides real-world examples by language.
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-3xl">
+            Every programming language and framework enforces conventions for naming variables, functions, and files. This guide compares the four major naming formats, explains when to use each, and provides real-world examples across modern languages.
           </p>
         </header>
 
         {/* Quick Comparison Table */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-6">Quick Comparison</h2>
-          <div className="overflow-x-auto rounded-2xl border border-white/10">
-            <table className="w-full text-sm">
+        <section className="mb-14">
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Quick Comparison Matrix</h2>
+          <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-xs">
+            <table className="w-full text-xs md:text-sm text-left">
               <thead>
-                <tr className="border-b border-white/10 bg-white/[0.02]">
-                  <th className="text-left p-4 font-bold text-muted">Convention</th>
-                  <th className="text-left p-4 font-bold text-muted">Example</th>
-                  <th className="text-left p-4 font-bold text-muted">Separator</th>
-                  <th className="text-left p-4 font-bold text-muted">First Letter</th>
-                  <th className="text-left p-4 font-bold text-muted">Primary Languages</th>
+                <tr className="border-b border-slate-200 bg-slate-50/80">
+                  <th className="p-4 font-bold text-slate-700">Convention</th>
+                  <th className="p-4 font-bold text-slate-700">Example</th>
+                  <th className="p-4 font-bold text-slate-700">Separator</th>
+                  <th className="p-4 font-bold text-slate-700">First Letter</th>
+                  <th className="p-4 font-bold text-slate-700">Primary Languages</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-100">
                 {[
-                  { name: 'camelCase', ex: 'userName', sep: 'None', first: 'Lowercase', langs: 'JS, Java, Swift', color: 'text-blue-400' },
-                  { name: 'PascalCase', ex: 'UserName', sep: 'None', first: 'Uppercase', langs: 'C#, React, Kotlin', color: 'text-teal-400' },
-                  { name: 'snake_case', ex: 'user_name', sep: 'Underscore _', first: 'Lowercase', langs: 'Python, Ruby, SQL', color: 'text-red-400' },
-                  { name: 'kebab-case', ex: 'user-name', sep: 'Hyphen -', first: 'Lowercase', langs: 'CSS, HTML, URLs', color: 'text-purple-400' },
-                  { name: 'SCREAMING_SNAKE', ex: 'USER_NAME', sep: 'Underscore _', first: 'UPPERCASE', langs: 'Constants in most langs', color: 'text-amber-400' },
+                  { name: 'camelCase', ex: 'userName', sep: 'None', first: 'Lowercase', langs: 'JS, Java, Swift', color: 'text-blue-600' },
+                  { name: 'PascalCase', ex: 'UserName', sep: 'None', first: 'Uppercase', langs: 'C#, React, Kotlin', color: 'text-teal-600' },
+                  { name: 'snake_case', ex: 'user_name', sep: 'Underscore _', first: 'Lowercase', langs: 'Python, Ruby, SQL', color: 'text-rose-600' },
+                  { name: 'kebab-case', ex: 'user-name', sep: 'Hyphen -', first: 'Lowercase', langs: 'CSS, HTML, URLs', color: 'text-purple-600' },
+                  { name: 'SCREAMING_SNAKE', ex: 'USER_NAME', sep: 'Underscore _', first: 'UPPERCASE', langs: 'Constants in all languages', color: 'text-amber-600' },
                 ].map(({ name, ex, sep, first, langs, color }) => (
-                  <tr key={name} className="hover:bg-white/[0.02] transition-colors">
+                  <tr key={name} className="hover:bg-slate-50 transition-colors">
                     <td className={`p-4 font-mono font-bold ${color}`}>{name}</td>
-                    <td className="p-4 font-mono text-white/80">{ex}</td>
-                    <td className="p-4 text-muted">{sep}</td>
-                    <td className="p-4 text-muted">{first}</td>
-                    <td className="p-4 text-muted">{langs}</td>
+                    <td className="p-4 font-mono font-semibold text-slate-900">{ex}</td>
+                    <td className="p-4 text-slate-600">{sep}</td>
+                    <td className="p-4 text-slate-600">{first}</td>
+                    <td className="p-4 text-slate-600">{langs}</td>
                   </tr>
                 ))}
               </tbody>
@@ -145,61 +151,75 @@ export default function NamingConventionsGuide() {
         </section>
 
         {/* Detailed breakdown per convention */}
-        {CONVENTIONS.map((c) => (
-          <section key={c.name} className="mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <span className={`px-3 py-1.5 rounded-xl border font-mono font-bold text-sm ${c.colorClass}`}>{c.example}</span>
-              <h2 className="text-2xl font-black text-white">{c.name}</h2>
-            </div>
-            <p className="text-muted mb-6 leading-relaxed">{c.desc}</p>
-            <div className="overflow-x-auto rounded-2xl border border-white/10">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/10 bg-white/[0.02]">
-                    <th className="text-left p-3 font-bold text-muted w-48">Language / Context</th>
-                    <th className="text-left p-3 font-bold text-muted">Used For</th>
-                    <th className="text-left p-3 font-bold text-muted">Example</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5">
-                  {c.when.map(({ lang, use, ex }) => (
-                    <tr key={lang} className="hover:bg-white/[0.02]">
-                      <td className={`p-3 font-bold ${c.colorClass.split(' ')[0]}`}>{lang}</td>
-                      <td className="p-3 text-muted">{use}</td>
-                      <td className="p-3 font-mono text-white/80 text-xs">{ex}</td>
+        <div className="space-y-12 mb-14">
+          {CONVENTIONS.map((c) => (
+            <section key={c.name} className="p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className={`px-3 py-1 rounded-xl border font-mono font-bold text-xs ${c.colorClass}`}>{c.example}</span>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900">{c.name}</h2>
+              </div>
+              <p className="text-slate-600 text-xs md:text-sm mb-6 leading-relaxed">{c.desc}</p>
+              
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50/50 mb-4">
+                <table className="w-full text-xs text-left">
+                  <thead>
+                    <tr className="border-b border-slate-200 bg-slate-100/70">
+                      <th className="p-3 font-bold text-slate-700 w-48">Language / Context</th>
+                      <th className="p-3 font-bold text-slate-700">Used For</th>
+                      <th className="p-3 font-bold text-slate-700">Example</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-4">
-              <Link href={`/tools/${c.name.toLowerCase().replace('case', '-case').replace('_', '_').replace('pascal-case', 'pascal-case-generator').replace('camel-case', 'camel-case-generator').replace('snake-case', 'snake-case-generator').replace('kebab-case', 'kebab-case-generator')}`}
-                className="text-sm font-bold text-primary hover:underline">
-                → Open {c.name} Generator
-              </Link>
-            </div>
-          </section>
-        ))}
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {c.when.map(({ lang, use, ex }) => (
+                      <tr key={lang} className="hover:bg-white transition-colors">
+                        <td className="p-3 font-bold text-slate-900">{lang}</td>
+                        <td className="p-3 text-slate-600">{use}</td>
+                        <td className="p-3 font-mono text-slate-800 font-semibold">{ex}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <Link
+                  href={`/tools/${c.toolSlug}`}
+                  className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"
+                >
+                  <span>Open {c.name} Generator Tool</span>
+                  <ArrowRight size={13} />
+                </Link>
+                <Link
+                  href="/services#migration"
+                  className="text-[11px] font-semibold text-indigo-600 hover:text-indigo-700 hidden sm:block"
+                >
+                  Need AST codebase migration? →
+                </Link>
+              </div>
+            </section>
+          ))}
+        </div>
 
         {/* Quick Converter */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-black text-white mb-4">Convert to Any Naming Convention</h2>
-          <p className="text-muted mb-6">Use the tool below to instantly convert any phrase to your preferred naming convention.</p>
+        <section className="mb-14">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Convert to Any Naming Convention Online</h2>
+          <p className="text-slate-600 text-sm mb-6">Use the interactive editor below to instantly convert any phrase or database identifier.</p>
           <CaseConverterTool />
         </section>
 
         {/* Related */}
-        <section>
-          <h2 className="text-2xl font-black text-white mb-6">Related Tools & Guides</h2>
-          <div className="flex flex-wrap gap-3">
+        <section className="p-6 md:p-8 bg-slate-50 border border-slate-200 rounded-3xl">
+          <h2 className="text-xl font-bold text-slate-900 mb-4">Related Tools & Resources</h2>
+          <div className="flex flex-wrap gap-2.5">
             {[
               { label: 'camelCase Generator', href: '/tools/camel-case-generator' },
               { label: 'PascalCase Generator', href: '/tools/pascal-case-generator' },
               { label: 'snake_case Generator', href: '/tools/snake-case-generator' },
               { label: 'kebab-case Generator', href: '/tools/kebab-case-generator' },
               { label: 'APA Title Case Guide', href: '/guides/apa-title-case' },
+              { label: 'Developer Services & APIs', href: '/services' },
             ].map(({ label, href }) => (
-              <Link key={href} href={href} className="px-4 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-sm text-muted hover:text-white hover:border-primary transition-all">{label} →</Link>
+              <Link key={href} href={href} className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs">{label} →</Link>
             ))}
           </div>
         </section>

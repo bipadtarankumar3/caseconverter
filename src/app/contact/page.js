@@ -24,14 +24,14 @@ export default function ContactPage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <a href="mailto:support@revoxera.com"
           className="group p-6 bg-white border border-slate-200 rounded-2xl hover:border-emerald-500 hover:shadow-xs transition-all">
           <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 text-lg">
             ✉️
           </div>
           <h2 className="text-base font-bold text-slate-900 mb-1">Email Support</h2>
-          <p className="text-slate-500 text-xs mb-3">For bugs, feature requests, and inquiries.</p>
+          <p className="text-slate-500 text-xs mb-3">For bugs and general inquiries.</p>
           <p className="text-emerald-600 font-bold text-sm">support@revoxera.com</p>
           <p className="text-slate-400 text-[11px] mt-0.5">Response within 24–48 hours</p>
         </a>
@@ -42,10 +42,21 @@ export default function ContactPage() {
             🐙
           </div>
           <h2 className="text-base font-bold text-slate-900 mb-1">GitHub Issues</h2>
-          <p className="text-slate-500 text-xs mb-3">Report bugs or request features publicly.</p>
+          <p className="text-slate-500 text-xs mb-3">Report bugs or contribute code.</p>
           <p className="text-emerald-600 font-bold text-sm">github.com/revoxera</p>
           <p className="text-slate-400 text-[11px] mt-0.5">Open source repository</p>
         </a>
+
+        <Link href="/services#quote"
+          className="group p-6 bg-indigo-50/50 border border-indigo-200/80 rounded-2xl hover:border-indigo-500 hover:shadow-xs transition-all">
+          <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4 text-lg">
+            ⚡
+          </div>
+          <h2 className="text-base font-bold text-slate-900 mb-1">API & Enterprise</h2>
+          <p className="text-slate-500 text-xs mb-3">Custom migration & API quote.</p>
+          <p className="text-indigo-600 font-bold text-sm">Explore Services →</p>
+          <p className="text-slate-400 text-[11px] mt-0.5">Dedicated SLA & contracts</p>
+        </Link>
       </div>
 
       {/* Interactive contact form */}

@@ -206,7 +206,7 @@ const howToSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Font preconnect + preload for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

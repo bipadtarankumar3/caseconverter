@@ -70,6 +70,9 @@ module.exports = {
       result.push({ loc: path, changefreq: 'monthly', priority: 0.6 });
     });
 
+    // Services page
+    result.push({ loc: '/services', changefreq: 'weekly', priority: 0.8 });
+
     // Static pages
     ['/about', '/contact'].forEach((path) => {
       result.push({ loc: path, changefreq: 'monthly', priority: 0.5 });
