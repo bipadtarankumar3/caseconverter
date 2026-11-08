@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'About CaseConverter — The Story Behind the Tool',
-  description: 'Learn about CaseConverter — a free, privacy-focused text transformation tool built by the Revoxera team. Convert text to any case format instantly, without ever sending data to a server.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/about' },
-};
+export const metadata = pageMeta({
+  path: "/about",
+  title: "About CaseConverter",
+  description: "CaseConverter is a free, privacy-first text case tool by Revoxera. Every conversion runs in your browser, so your text is never uploaded.",
+});
 
 export default function AboutPage() {
   return (

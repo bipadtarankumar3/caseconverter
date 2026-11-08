@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import ContactForm from './ContactForm';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Contact Us — CaseConverter Support',
-  description: 'Get in touch with the CaseConverter team. Report bugs, suggest features, or ask questions about our text case conversion tools.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/contact' },
-};
+export const metadata = pageMeta({
+  path: "/contact",
+  title: "Contact Us",
+  description: "Contact the CaseConverter team to report a bug, request a feature, or ask a question about our free text case conversion tools.",
+});
 
 export default function ContactPage() {
   return (

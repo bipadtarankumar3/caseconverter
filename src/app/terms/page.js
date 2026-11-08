@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { FileCheck } from 'lucide-react';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Terms & Conditions | CaseConverter',
-  description: 'Read the terms and conditions governing usage of CaseConverter. Free online developer and content writer utility tool.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/terms' },
-};
+export const metadata = pageMeta({
+  path: "/terms",
+  title: "Terms & Conditions",
+  description: "The terms and conditions for using CaseConverter, the free online text case conversion tool for writers, students and developers.",
+});
 
 export default function TermsPage() {
   return (

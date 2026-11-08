@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import CaseConverterTool from '../../../components/CaseConverterTool';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'APA Title Case Rules & Free Converter — 7th Edition Guide',
-  description: 'Complete guide to APA Title Case (7th edition). Learn which words to capitalize, which to lowercase, with real examples and our free APA title case converter tool.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/guides/apa-title-case' },
-};
+export const metadata = pageMeta({
+  path: "/guides/apa-title-case",
+  title: "APA Title Case Rules & Examples (7th Ed.)",
+  description: "APA 7th edition title case rules: which words to capitalize, which stay lowercase, real examples, and a free converter for your headings.",
+});
 
 const ALWAYS_CAP = [
   'First word of the title and subtitle',
@@ -39,10 +40,21 @@ const EXAMPLES = [
   },
 ];
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://caseconverter.revoxera.com' },
+    { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://caseconverter.revoxera.com/guides/naming-conventions' },
+    { '@type': 'ListItem', position: 3, name: 'APA Title Case', item: 'https://caseconverter.revoxera.com/guides/apa-title-case' },
+  ],
+};
+
 export default function ApaTitleCaseGuide() {
   return (
     <div className="container mx-auto px-4 md:px-6 max-w-[900px] py-10 md:py-16">
-      
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-500">
         <Link href="/" className="hover:text-slate-900 transition-colors">Home</Link>
@@ -150,7 +162,7 @@ export default function ApaTitleCaseGuide() {
         <div className="flex flex-wrap gap-2.5">
           <Link href="/tools/title-case" className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs">Title Case Tool →</Link>
           <Link href="/guides/naming-conventions" className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs">Naming Conventions Guide →</Link>
-          <Link href="/services" className="px-4 py-2 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-700 hover:bg-indigo-100 transition-all">Typography API & Enterprise Suite →</Link>
+          <Link href="/services" className="px-4 py-2 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-700 hover:bg-indigo-100 transition-all">More Revoxera Developer Tools →</Link>
         </div>
       </section>
     </div>

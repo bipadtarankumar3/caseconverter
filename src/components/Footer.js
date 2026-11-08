@@ -29,6 +29,7 @@ const FOOTER_SECTIONS = {
   ],
   'Guides & Resources': [
     { label: 'APA Title Case Rules', href: '/guides/apa-title-case' },
+    { label: 'Sentence Case vs Title Case', href: '/guides/sentence-case-vs-title-case' },
     { label: 'Naming Conventions Guide', href: '/guides/naming-conventions' },
     { label: 'Interactive Techniques Matrix', href: '/#techniques' },
     { label: 'JavaScript Case Snippets', href: '/#techniques' },

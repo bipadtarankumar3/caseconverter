@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Zap as ZapIcon, ShieldCheck, Sparkles,
   Star, Trophy, MessageSquare, Plus, HelpCircle, Lock,
@@ -9,6 +7,7 @@ import {
 import Link from 'next/link';
 import CaseConverterTool from '../components/CaseConverterTool';
 import ModernTechniques from '../components/ModernTechniques';
+import { pageMeta } from '@/lib/seo';
 
 const TOOL_CHIPS = [
   { href: '/tools/title-case',           label: 'Title Case',       prefix: 'TC', color: 'bg-emerald-500' },
@@ -21,9 +20,37 @@ const TOOL_CHIPS = [
   { href: '/tools/kebab-case-generator', label: 'kebab-case',       prefix: 'kc', color: 'bg-purple-500' },
 ];
 
+export const metadata = pageMeta({
+  path: "/",
+  title: "Case Converter – Free Online Text Case Changer",
+  description: "Convert text to Title Case, Sentence case, UPPER CASE, lowercase, camelCase, snake_case & more. Free, instant, private — your text never leaves your browser.",
+  absoluteTitle: true,
+});
+
+const FAQS = [
+  { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'What cases does this converter support?', a: 'CaseConverter supports 11 formats: Sentence case, lower case, UPPER CASE, Capitalized Case, Alternating Case, Title Case, Inverse Case, camelCase, PascalCase, snake_case, and kebab-case.' },
+  { icon: <Briefcase size={18} className="text-indigo-600 shrink-0" />, q: 'Do you have other developer tools?', a: 'Yes. CaseConverter is part of the Revoxera suite of free, browser-based tools, including an HTML Color Code picker, SQL Formatter, JSON Formatter & Mapper, and AI Prompt Generator. See the Services page for the full list.' },
+  { icon: <Lock size={18} className="text-emerald-600 shrink-0" />, q: 'Is this tool safe for sensitive text & proprietary code?', a: 'Yes. All transformations run entirely in your local browser with client-side JavaScript. No text is ever uploaded, logged, or stored on our servers — your data remains 100% private.' },
+  { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'What is the difference between camelCase and PascalCase?', a: 'camelCase starts with a lowercase letter (e.g., myVariableName) and is used in JavaScript and Java. PascalCase starts with an uppercase letter (e.g., MyVariableName) and is used in C# and for React/class names.' },
+  { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'When should I use snake_case vs kebab-case?', a: 'Use snake_case for Python variables and database column names. Use kebab-case for CSS class names, URL slugs, and HTML attributes.' },
+  { icon: <Rocket size={18} className="text-emerald-600 shrink-0" />, q: 'Can I use keyboard shortcuts?', a: 'Yes! Press ? at any time to open keyboard shortcuts. For example: Alt+Shift+T converts to Title Case, Alt+Shift+M converts to camelCase, and Alt+Shift+N converts to snake_case. Use the Undo button to step back after any conversion.' },
+  { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'Is there a character limit?', a: 'No. CaseConverter processes text of any length in your browser. Large documents, code files, and entire articles are all supported with sub-millisecond execution.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
 export default function CaseConverterHome() {
   return (
     <div className="w-full max-w-[1400px] mx-auto px-3.5 sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       {/* ── Hero ── */}
       <section className="text-center mb-8 md:mb-12 max-w-[950px] mx-auto pt-6 sm:pt-8 md:pt-12">
@@ -48,7 +75,7 @@ export default function CaseConverterHome() {
         <p className="text-base md:text-lg text-slate-600 leading-relaxed mx-auto max-w-2xl">
           Instantly convert text to Title Case, camelCase, snake_case, UPPER CASE, and 7 more formats in your browser.
           <span className="text-slate-900 font-bold block sm:inline sm:ml-1">
-            Free forever &bull; Zero server tracking &bull; API & AST refactoring ready.
+            Free forever &bull; No sign-up &bull; Your text never leaves your browser.
           </span>
         </p>
 
@@ -276,15 +303,7 @@ export default function CaseConverterHome() {
       <section id="faq" className="max-w-4xl mx-auto mb-16 md:mb-20" aria-label="Frequently asked questions">
         <h2 className="text-3xl md:text-4xl font-black mb-10 text-center text-slate-900 tracking-tight">Frequently Asked Questions</h2>
         <div className="space-y-3">
-          {[
-            { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'What cases does this converter support?', a: 'CaseConverter supports 11 formats: Sentence case, lower case, UPPER CASE, Capitalized Case, Alternating Case, Title Case, Inverse Case, camelCase, PascalCase, snake_case, and kebab-case.' },
-            { icon: <Briefcase size={18} className="text-indigo-600 shrink-0" />, q: 'Do you offer an API or enterprise services?', a: 'Yes! We offer high-throughput edge REST & GraphQL APIs, automated AST codebase refactoring migrations, and custom editorial headline engines. Check out our Services page for details.' },
-            { icon: <Lock size={18} className="text-emerald-600 shrink-0" />, q: 'Is this tool safe for sensitive text & proprietary code?', a: 'Yes. All transformations run entirely in your local browser with client-side JavaScript. No text is ever uploaded, logged, or stored on our servers — your data remains 100% private.' },
-            { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'What is the difference between camelCase and PascalCase?', a: 'camelCase starts with a lowercase letter (e.g., myVariableName) and is used in JavaScript and Java. PascalCase starts with an uppercase letter (e.g., MyVariableName) and is used in C# and for React/class names.' },
-            { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'When should I use snake_case vs kebab-case?', a: 'Use snake_case for Python variables and database column names. Use kebab-case for CSS class names, URL slugs, and HTML attributes.' },
-            { icon: <Rocket size={18} className="text-emerald-600 shrink-0" />, q: 'Can I use keyboard shortcuts?', a: 'Yes! Press ? at any time to open keyboard shortcuts. For example: Ctrl+Shift+T converts to Title Case, Ctrl+Shift+M converts to camelCase, and Ctrl+Shift+N converts to snake_case.' },
-            { icon: <HelpCircle size={18} className="text-emerald-600 shrink-0" />, q: 'Is there a character limit?', a: 'No. CaseConverter processes text of any length in your browser. Large documents, code files, and entire articles are all supported with sub-millisecond execution.' },
-          ].map(({ icon, q, a }) => (
+          {FAQS.map(({ icon, q, a }) => (
             <details key={q} className="group bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all shadow-xs">
               <summary className="flex items-center gap-3 p-4 md:p-5 font-bold text-slate-900 cursor-pointer hover:bg-slate-50 transition-colors list-none text-sm md:text-base">
                 {icon}

@@ -5,9 +5,9 @@ import { createPortal } from 'react-dom';
 import {
   Copy, Share2, Download, Trash2,
   Check, Hash, FileText, Type, Link2,
-  History, X, Keyboard, ChevronDown, ChevronLeft, ChevronRight,
+  History, X, Keyboard, ChevronLeft, ChevronRight, Undo2,
 } from 'lucide-react';
-import Link from 'next/link';
+import { convertText } from '@/lib/caseEngine';
 
 // All conversion modes
 export const CONVERSION_MODES = [
@@ -24,63 +24,27 @@ export const CONVERSION_MODES = [
   { id: 'kebab',       label: 'kebab-case',         prefix: 'kc', color: 'from-[#a855f7] to-[#c084fc]' },
 ];
 
-// ── Conversion logic ──────────────────────────────────────────────────────────
-function convertText(text, mode) {
-  if (!text) return text;
-  const TITLE_EXCEPTIONS = new Set(['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'in', 'of', 'as', 'up']);
-
-  switch (mode) {
-    case 'sentence':
-      return text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-    case 'lower':
-      return text.toLowerCase();
-    case 'upper':
-      return text.toUpperCase();
-    case 'capitalized':
-      return text.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-    case 'alternating':
-      return text.split('').map((c, i) => i % 2 === 0 ? c.toLowerCase() : c.toUpperCase()).join('');
-    case 'title': {
-      const words = text.toLowerCase().split(' ');
-      return words.map((word, i) => {
-        if (i !== 0 && i !== words.length - 1 && TITLE_EXCEPTIONS.has(word)) return word;
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      }).join(' ');
-    }
-    case 'inverse':
-      return text.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('');
-    case 'camel': {
-      return text.replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
-        .replace(/^[A-Z]/, c => c.toLowerCase())
-        .replace(/[^a-zA-Z0-9]/g, '');
-    }
-    case 'pascal': {
-      return text.replace(/(?:^|\s+|[^a-zA-Z0-9]+)(.)/g, (_, chr) => chr.toUpperCase())
-        .replace(/[^a-zA-Z0-9]/g, '');
-    }
-    case 'snake':
-      return text.trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
-    case 'kebab':
-      return text.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '').toLowerCase();
-    default:
-      return text;
-  }
-}
+export { convertText };
 
 // ── Keyboard shortcut map ─────────────────────────────────────────────────────
 const SHORTCUTS = [
-  { keys: ['Ctrl', 'Shift', 'S'], mode: 'sentence', label: 'Sentence case' },
-  { keys: ['Ctrl', 'Shift', 'T'], mode: 'title',    label: 'Title Case' },
-  { keys: ['Ctrl', 'Shift', 'U'], mode: 'upper',    label: 'UPPER CASE' },
-  { keys: ['Ctrl', 'Shift', 'L'], mode: 'lower',    label: 'lower case' },
-  { keys: ['Ctrl', 'Shift', 'M'], mode: 'camel',    label: 'camelCase' },
-  { keys: ['Ctrl', 'Shift', 'P'], mode: 'pascal',   label: 'PascalCase' },
-  { keys: ['Ctrl', 'Shift', 'N'], mode: 'snake',    label: 'snake_case' },
-  { keys: ['Ctrl', 'Shift', 'K'], mode: 'kebab',    label: 'kebab-case' },
+  { keys: ['Alt', 'Shift', 'S'], mode: 'sentence', label: 'Sentence case' },
+  { keys: ['Alt', 'Shift', 'T'], mode: 'title',    label: 'Title Case' },
+  { keys: ['Alt', 'Shift', 'U'], mode: 'upper',    label: 'UPPER CASE' },
+  { keys: ['Alt', 'Shift', 'L'], mode: 'lower',    label: 'lower case' },
+  { keys: ['Alt', 'Shift', 'M'], mode: 'camel',    label: 'camelCase' },
+  { keys: ['Alt', 'Shift', 'P'], mode: 'pascal',   label: 'PascalCase' },
+  { keys: ['Alt', 'Shift', 'N'], mode: 'snake',    label: 'snake_case' },
+  { keys: ['Alt', 'Shift', 'K'], mode: 'kebab',    label: 'kebab-case' },
 ];
 
 const MAX_HISTORY = 20;
+const MAX_UNDO = 30;
 const HISTORY_KEY = 'cc_history';
+const DRAFT_KEY = 'cc_draft';
+
+const isEditable = (el) =>
+  el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable);
 
 function loadHistory() {
   try {
@@ -101,7 +65,24 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [history, setHistory] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const [undoStack, setUndoStack] = useState([]);
   const textareaRef = useRef(null);
+
+  // Replace the text but keep the previous value so the user can undo
+  // (programmatic updates wipe the browser's native Ctrl+Z history).
+  const commitText = useCallback((next, prev) => {
+    if (next === prev) return;
+    setUndoStack((s) => [...s.slice(-(MAX_UNDO - 1)), prev]);
+    setText(next);
+  }, []);
+
+  const handleUndo = () => {
+    setUndoStack((s) => {
+      if (!s.length) return s;
+      setText(s[s.length - 1]);
+      return s.slice(0, -1);
+    });
+  };
 
   const scrollRef = useRef(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -151,15 +132,31 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
 
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
+      // URLSearchParams already decodes; decoding again throws on any "%" in the text.
       const urlText = params.get('t');
       const urlMode = params.get('m');
       if (urlText) {
-        const decoded = decodeURIComponent(urlText);
-        const result = urlMode ? convertText(decoded, urlMode) : decoded;
-        setText(result);
+        setText(urlMode ? convertText(urlText, urlMode) : urlText);
+      } else {
+        try {
+          const draft = localStorage.getItem(DRAFT_KEY);
+          if (draft) setText(draft);
+        } catch {}
       }
     }
   }, []);
+
+  // Autosave the draft locally so returning visitors pick up where they left off.
+  useEffect(() => {
+    if (!mounted) return;
+    const t = setTimeout(() => {
+      try {
+        if (text) localStorage.setItem(DRAFT_KEY, text);
+        else localStorage.removeItem(DRAFT_KEY);
+      } catch {}
+    }, 400);
+    return () => clearTimeout(t);
+  }, [text, mounted]);
 
   // Reset copied state
   useEffect(() => {
@@ -169,37 +166,11 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
     if (linkCopied) { const t = setTimeout(() => setLinkCopied(false), 2000); return () => clearTimeout(t); }
   }, [linkCopied]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === '?') { setShowShortcuts(prev => !prev); return; }
-      if (e.key === 'Escape') { setShowShortcuts(false); setShowHistory(false); return; }
-
-      if (e.ctrlKey && e.shiftKey) {
-        const shortcut = SHORTCUTS.find(s => s.keys[2].toLowerCase() === e.key.toLowerCase());
-        if (shortcut) {
-          e.preventDefault();
-          applyConversion(shortcut.mode);
-        }
-      }
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [text]);
-
-  // ── Stats ────────────────────────────────────────────────────────────────────
-  const stats = {
-    chars: text.length,
-    words: text.trim() ? text.trim().split(/\s+/).length : 0,
-    lines: text.split('\n').filter(l => l.length > 0).length,
-    sentences: text.split(/[.!?]+/).filter(s => s.trim()).length,
-  };
-
   // ── Apply conversion ─────────────────────────────────────────────────────────
   const applyConversion = useCallback((mode) => {
     if (!text) return;
     const converted = convertText(text, mode);
-    setText(converted);
+    commitText(converted, text);
 
     // Save to history
     const entry = {
@@ -213,20 +184,65 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
     const updated = [entry, ...loadHistory()].slice(0, MAX_HISTORY);
     setHistory(updated);
     saveHistory(updated);
-  }, [text]);
+  }, [text, commitText]);
 
-  // ── Actions ───────────────────────────────────────────────────────────────────
-  const handleCopy = () => {
-    if (!text) return;
-    navigator.clipboard.writeText(text);
-    setCopied(true);
+  // Keyboard shortcuts — Alt+Shift+<letter>. (Ctrl+Shift+T/N/P are reserved by
+  // browsers for reopen-tab / incognito / private window and can't be overridden.)
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape') { setShowShortcuts(false); setShowHistory(false); return; }
+      // Only treat "?" as a shortcut when the user isn't typing.
+      if (e.key === '?' && !isEditable(e.target)) { setShowShortcuts(prev => !prev); return; }
+
+      if (e.altKey && e.shiftKey && !e.ctrlKey && !e.metaKey && e.code?.startsWith('Key')) {
+        const letter = e.code.slice(3);
+        const shortcut = SHORTCUTS.find(s => s.keys[2] === letter);
+        if (shortcut) {
+          e.preventDefault();
+          applyConversion(shortcut.mode);
+        }
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [applyConversion]);
+
+  // ── Stats ────────────────────────────────────────────────────────────────────
+  const stats = {
+    chars: text.length,
+    words: text.trim() ? text.trim().split(/\s+/).length : 0,
+    lines: text.split('\n').filter(l => l.length > 0).length,
+    sentences: text.split(/[.!?]+/).filter(s => s.trim()).length,
   };
 
-  const handleShareLink = () => {
+  // ── Actions ───────────────────────────────────────────────────────────────────
+  const copyToClipboard = async (value) => {
+    try {
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      // Fallback for non-secure contexts / older browsers
+      const ta = document.createElement('textarea');
+      ta.value = value;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      return ok;
+    }
+  };
+
+  const handleCopy = async () => {
+    if (!text) return;
+    if (await copyToClipboard(text)) setCopied(true);
+  };
+
+  const handleShareLink = async () => {
     if (!text) return;
     const url = `${window.location.origin}${window.location.pathname}?t=${encodeURIComponent(text)}`;
-    navigator.clipboard.writeText(url);
-    setLinkCopied(true);
+    if (await copyToClipboard(url)) setLinkCopied(true);
   };
 
   const handleDownload = () => {
@@ -235,12 +251,13 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
     el.href = URL.createObjectURL(new Blob([text], { type: 'text/plain' }));
     el.download = 'converted-text.txt';
     el.click();
+    setTimeout(() => URL.revokeObjectURL(el.href), 0);
   };
 
-  const handleClear = () => setText('');
+  const handleClear = () => commitText('', text);
 
   const restoreFromHistory = (entry) => {
-    setText(entry.result);
+    commitText(entry.result, text);
     setShowHistory(false);
   };
 
@@ -290,6 +307,10 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
               className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-red-600 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center">
               <Trash2 size={18} />
             </button>
+            <button suppressHydrationWarning onClick={handleUndo} disabled={!undoStack.length} title="Undo last change" aria-label="Undo last change"
+              className="text-slate-600 p-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 transition-all shadow-xs flex items-center justify-center disabled:opacity-40 disabled:pointer-events-none">
+              <Undo2 size={18} />
+            </button>
             <button suppressHydrationWarning onClick={() => setShowHistory(!showHistory)} title="Conversion history" aria-label="Show history"
               className={`text-slate-600 p-2 rounded-lg bg-white border transition-all shadow-xs flex items-center justify-center ${showHistory ? 'border-emerald-500 text-emerald-600 bg-emerald-50/40' : 'border-slate-200 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300'}`}>
               <History size={18} />
@@ -304,6 +325,7 @@ export default function CaseConverterTool({ initialMode = null, compact = false 
           <div className="flex gap-3 sm:gap-4 md:gap-6 text-xs text-slate-500 flex-wrap justify-between sm:justify-end w-full sm:w-auto pt-1.5 sm:pt-0 border-t sm:border-t-0 border-slate-200/60">
             <div className="flex items-center gap-1.5"><Hash size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.chars}</strong> Chars</span></div>
             <div className="flex items-center gap-1.5"><Type size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.words}</strong> Words</span></div>
+            <div className="flex items-center gap-1.5"><span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.sentences}</strong> Sentences</span></div>
             <div className="flex items-center gap-1.5"><FileText size={14} /> <span><strong className="text-slate-900 text-xs sm:text-sm font-bold">{stats.lines}</strong> Lines</span></div>
           </div>
         </div>

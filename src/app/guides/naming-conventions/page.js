@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import CaseConverterTool from '../../../components/CaseConverterTool';
 import { ArrowRight, Code2, BookOpen, Layers } from 'lucide-react';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Code Naming Conventions — camelCase vs PascalCase vs snake_case vs kebab-case',
-  description: 'Master the differences between camelCase, PascalCase, snake_case, and kebab-case. Learn which naming convention to use in JavaScript, Python, CSS, SQL, and more.',
+export const metadata = pageMeta({
+  path: "/guides/naming-conventions",
+  title: "camelCase vs snake_case vs kebab-case Guide",
+  description: "camelCase, PascalCase, snake_case or kebab-case? See which naming convention to use in JavaScript, Python, CSS, SQL and more, with examples.",
   keywords: 'camelcase vs pascalcase, naming conventions programming, snake case vs camel case, code naming standards, variable naming conventions, kebab case css',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/guides/naming-conventions' },
-};
+});
 
 const articleSchema = {
   '@context': 'https://schema.org',

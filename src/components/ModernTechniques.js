@@ -149,43 +149,48 @@ export default function ModernTechniques() {
 
   // Code snippets generator
   const codeSnippets = {
-    js: `// Modern TypeScript / JavaScript Edge Transformation
-import { toCamelCase, toSnakeCase, toTitleCase } from '@revoxera/case-engine';
+    js: `// Zero-dependency JavaScript / TypeScript helpers
+const words = (s) => s
+  .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+  .split(/[^a-zA-Z0-9]+/)
+  .filter(Boolean);
+
+const toCamelCase = (s) => words(s)
+  .map((w, i) => i ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w.toLowerCase())
+  .join('');
+const toSnakeCase = (s) => words(s).map((w) => w.toLowerCase()).join('_');
+const toKebabCase = (s) => words(s).map((w) => w.toLowerCase()).join('-');
 
 const rawInput = ${JSON.stringify(inputText)};
+toCamelCase(rawInput); // "${conversions.find(c => c.id === 'camel')?.value}"
+toSnakeCase(rawInput); // "${conversions.find(c => c.id === 'snake')?.value}"
+toKebabCase(rawInput); // "${conversions.find(c => c.id === 'kebab')?.value}"`,
 
-const camelResult = toCamelCase(rawInput); // "${conversions.find(c => c.id === 'camel')?.value}"
-const snakeResult = toSnakeCase(rawInput); // "${conversions.find(c => c.id === 'snake')?.value}"
-const titleResult = toTitleCase(rawInput); // "${conversions.find(c => c.id === 'title')?.value}"
-
-console.log({ camelResult, snakeResult, titleResult });`,
-
-    py: `# Python 3.12+ Identifier Normalization
+    py: `# Python 3 — standard library only
 import re
 
+def words(text: str) -> list[str]:
+    text = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", text)
+    return [w for w in re.split(r"[^a-zA-Z0-9]+", text) if w]
+
 def to_snake_case(text: str) -> str:
-    tokens = re.findall(r'[A-Z]?[a-z]+|[A-Z]+(?=[A-Z][a-z]|\\d|\\W|$)|\\d+', text)
-    return "_".join(t.lower() for t in tokens)
+    return "_".join(w.lower() for w in words(text))
 
-text = ${JSON.stringify(inputText)}
-print(to_snake_case(text))
-# Output: ${conversions.find(c => c.id === 'snake')?.value}`,
+print(to_snake_case(${JSON.stringify(inputText)}))
+# ${conversions.find(c => c.id === 'snake')?.value}`,
 
-    curl: `# Edge REST API (Sub-millisecond execution)
-curl -X POST "https://api.revoxera.com/v1/transform" \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "text": ${JSON.stringify(inputText)},
-    "modes": ["camel", "snake", "kebab", "title"]
-  }'`,
+    css: `/* CSS can change how case is displayed (not the underlying text) */
+.heading   { text-transform: capitalize; } /* ${conversions.find(c => c.id === 'title')?.value} */
+.label     { text-transform: uppercase; }  /* ${conversions.find(c => c.id === 'upper')?.value} */
+.lowercase { text-transform: lowercase; }
 
-    cli: `# Revoxera CLI Utility
-npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
+/* kebab-case is the convention for class names: */
+.${conversions.find(c => c.id === 'kebab')?.value || 'my-class'} { }`,
 
-# Output:
-# camel: ${conversions.find(c => c.id === 'camel')?.value}
-# snake: ${conversions.find(c => c.id === 'snake')?.value}`,
+    bash: `# Shell (GNU sed / tr)
+echo ${JSON.stringify(inputText)} | tr '[:lower:]' '[:upper:]'
+echo ${JSON.stringify(inputText)} | tr ' ' '_' | tr '[:upper:]' '[:lower:]'
+# snake_case: ${conversions.find(c => c.id === 'snake')?.value}`,
   };
 
   return (
@@ -320,8 +325,8 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
                 {[
                   { id: 'js', label: 'TypeScript / JS' },
                   { id: 'py', label: 'Python' },
-                  { id: 'curl', label: 'cURL API' },
-                  { id: 'cli', label: 'CLI' },
+                  { id: 'css', label: 'CSS' },
+                  { id: 'bash', label: 'Shell' },
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -366,7 +371,7 @@ npx @revoxera/case-cli convert "${inputText}" --to camel,snake,kebab
           <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
             <span className="flex items-center gap-1.5">
               <ShieldCheck size={14} className="text-emerald-400" />
-              AST & Tokenizer compliant &bull; 0 runtime vulnerabilities
+              Zero dependencies &bull; copy-paste ready
             </span>
             <Link href="/services" className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
               <span>Ecosystem Tools</span>

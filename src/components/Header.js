@@ -139,7 +139,7 @@ export default function Header() {
     <header
       className={`sticky top-0 z-[100] transition-all duration-200 ${
         scrolled
-          ? 'h-[68px] bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-sm'
+          ? 'h-[68px] bg-white border-b border-slate-200/90 shadow-sm'
           : 'h-[76px] bg-white border-b border-slate-200/60'
       }`}
       role="banner"
@@ -190,6 +190,7 @@ export default function Header() {
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-slate-50 transition-all group"
               aria-haspopup="true"
               aria-expanded={toolsOpen}
+              onClick={() => setToolsOpen((o) => !o)}
             >
               <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center">
                 <Layers size={13} />
@@ -412,7 +413,7 @@ export default function Header() {
 
       {/* ── Mobile Responsive Drawer Menu ── */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[68px] bottom-0 bg-white/95 backdrop-blur-xl border-b border-slate-200 z-[999] overflow-y-auto px-4 py-6 animate-fade-in flex flex-col justify-between">
+        <div className={`md:hidden fixed inset-x-0 ${scrolled ? 'top-[68px]' : 'top-[76px]'} bottom-0 bg-white border-b border-slate-200 z-[999] overflow-y-auto px-4 py-6 animate-fade-in flex flex-col justify-between`}>
           <div className="space-y-6">
 
             {/* Quick Navigation Links */}

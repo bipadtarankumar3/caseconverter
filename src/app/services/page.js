@@ -4,12 +4,13 @@ import {
   ExternalLink, Sparkles, ShieldCheck, Zap, Lock,
   Clock, CheckCircle2, RefreshCw, Layers
 } from 'lucide-react';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Services & Ecosystem Platforms — Revoxera Developer Suite',
-  description: 'Explore the Revoxera suite of free online developer utilities: HTML Color Codes, SQL Formatter, JSON Formatter & Mapper, AI Prompt Generator, and CaseConverter.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/services' },
-};
+export const metadata = pageMeta({
+  path: "/services",
+  title: "Free Developer Tools by Revoxera",
+  description: "Free browser-based developer tools from Revoxera: HTML color code picker, SQL formatter, JSON formatter & mapper, and AI prompt generator.",
+});
 
 const ECOSYSTEM_SERVICES = [
   {

@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Privacy Policy | CaseConverter',
-  description: 'Understand how CaseConverter handles your data. 100% offline, local browser processing, zero server connections, no tracking.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/privacy' },
-};
+export const metadata = pageMeta({
+  path: "/privacy",
+  title: "Privacy Policy",
+  description: "How CaseConverter handles your data: text is processed locally in your browser and never uploaded. What we store locally and how we use analytics.",
+});
 
 export default function PrivacyPage() {
   return (
@@ -40,24 +41,24 @@ export default function PrivacyPage() {
         <div className="p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
           <h2 className="text-xl font-bold text-slate-900 mb-3">2. Local Storage Usage</h2>
           <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-3">
-            We utilize your browser standard <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800 font-mono">localStorage</code> solely to provide client-side conveniences such as your Conversion History (saving the last 20 conversions) and formatting preferences.
+            We utilize your browser standard <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800 font-mono">localStorage</code> solely to provide client-side conveniences: your Conversion History (the last 20 conversions) and an autosaved draft of the text in the editor, so it is still there when you come back.
           </p>
           <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-            This data remains completely under your device control. You can clear it at any time by clicking the trash icon in the toolbar or clearing your browser cache.
-          </p>
-        </div>
-
-        <div className="p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">3. No Advertising or Tracking Cookies</h2>
-          <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-            We do not sell user data, run third-party advertising networks, or use invasive cross-site tracking cookies. We maintain standard aggregate telemetry (Google Analytics) purely to monitor server performance, uptime, and page reliability without logging any user inputs or converted text.
+            This data remains completely under your device control. You can clear the draft with the trash icon, clear history from the History panel, or clear your browser&rsquo;s site data at any time.
           </p>
         </div>
 
         <div className="p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">4. Developer & Enterprise APIs</h2>
+          <h2 className="text-xl font-bold text-slate-900 mb-3">3. Analytics and Cookies</h2>
           <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-            For users who subscribe to our optional Revoxera Edge Text APIs or AST Migration Services, all communications use TLS 1.3 encryption with strict Zero Data Retention policies governed by our Enterprise Data Processing Addendum (DPA).
+            We do not sell user data or run third-party advertising networks. We use Google Analytics to understand aggregate traffic (such as page views, referrers, and device type). Google Analytics sets its own cookies; see <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-semibold hover:underline">how Google uses data</a>. The text you type or convert is never sent to Google Analytics or to us.
+          </p>
+        </div>
+
+        <div className="p-6 md:p-8 bg-white border border-slate-200 rounded-3xl shadow-xs">
+          <h2 className="text-xl font-bold text-slate-900 mb-3">4. Links to Other Revoxera Tools</h2>
+          <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Our Services page links to other Revoxera tools hosted on separate subdomains. Each of those sites runs independently and may have its own privacy notice.
           </p>
         </div>
 

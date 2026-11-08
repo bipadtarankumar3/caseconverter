@@ -1,12 +1,13 @@
 import CaseConverterTool from '../../components/CaseConverterTool';
 import Link from 'next/link';
 import { ArrowRight, Layers, Sparkles, BookOpen, ShieldCheck, Zap } from 'lucide-react';
+import { pageMeta } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Text Case Converter Tools Directory — All 11 Formats',
-  description: 'Browse all text case conversion tools: Title Case, camelCase, snake_case, kebab-case, UPPER CASE, lowercase, PascalCase, Sentence case and more. Free, instant, browser-based.',
-  alternates: { canonical: 'https://caseconverter.revoxera.com/tools' },
-};
+export const metadata = pageMeta({
+  path: "/tools",
+  title: "All Text Case Converter Tools",
+  description: "Every case converter in one place: Title Case, Sentence case, UPPER, lower, camelCase, PascalCase, snake_case and kebab-case. Free and instant.",
+});
 
 const TOOLS = [
   {
@@ -83,9 +84,19 @@ const TOOLS = [
   },
 ];
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://caseconverter.revoxera.com' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://caseconverter.revoxera.com/tools' },
+  ],
+};
+
 export default function ToolsHub() {
   return (
     <div className="container mx-auto px-4 md:px-6 max-w-[1400px] py-10 md:py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500">
@@ -169,7 +180,7 @@ export default function ToolsHub() {
             APA title case rules & examples →
           </Link>
           <Link href="/services" className="px-4 py-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-bold text-indigo-700 hover:bg-indigo-100 transition-all">
-            Need enterprise API or codebase migration? →
+            More free developer tools from Revoxera →
           </Link>
         </div>
       </section>
