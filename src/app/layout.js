@@ -39,9 +39,6 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    apple: '/logo.png',
-  },
 };
 
 // ── Schema: SoftwareApplication ──────────────────────────────────────────────

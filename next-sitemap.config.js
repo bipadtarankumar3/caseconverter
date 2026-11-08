@@ -5,7 +5,7 @@ module.exports = {
   siteUrl: 'https://caseconverter.revoxera.com',
   generateRobotsTxt: false, // We manage robots.txt manually
   sitemapSize: 5000,
-  exclude: ['/api/*', '/icon.png', '/opengraph-image*'],
+  exclude: ['/api/*', '/icon.png', '/apple-icon.png', '/favicon.ico', '/opengraph-image*'],
   transform: async (config, path) => {
     let priority = 0.5;
     let changefreq = 'monthly';
